@@ -235,10 +235,11 @@ a {
   justify-content: flex-end;
 }
 
+/* The SVG fills with currentColor, which renders black inside <img>; the filter turns it white. */
 .navbar__logo img {
-  width: 84px;
-  height: 32px;
-  object-fit: contain;
+  width: 156px;
+  height: 16px;
+  filter: brightness(0) invert(1);
 }
 
 .navbar__links {
@@ -251,8 +252,10 @@ a {
   white-space: nowrap;
 }
 
-.navbar__links a:hover {
+.navbar__links a:hover,
+.navbar__links a[aria-current="page"] {
   text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 /* Hero */
@@ -635,7 +638,68 @@ a {
   gap: 24px;
 }
 
-/* The Figma file only has a desktop frame; these breakpoints are adaptations. */
+/* Model 3 page: no Figma frame exists, so these extend the home page components. */
+.section--model-hero {
+  padding-top: 64px;
+}
+
+.section--tight {
+  padding-block: 0;
+}
+
+.model-hero {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 16px;
+  width: 428px;
+  padding-right: 48px;
+}
+
+.model-hero .actions {
+  margin-top: 16px;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  width: 100%;
+}
+
+.trims {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px;
+  width: 100%;
+}
+
+.trim {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 24px;
+  border-radius: var(--radius);
+  background: var(--color-foreground);
+}
+
+.trim__name {
+  font-size: var(--text-medium);
+  font-weight: 600;
+}
+
+.trim__price {
+  margin-bottom: 16px;
+  font-size: var(--heading-5);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+
+/* These breakpoints are adaptations, not built from the Figma "Home • Mobile" frame. */
 @media (max-width: 1100px) {
   :root {
     --page-padding: 32px;
@@ -692,6 +756,19 @@ a {
   .compare__col-spec {
     width: 240px;
   }
+
+  .compare__table--simple {
+    min-width: 0;
+  }
+
+  .model-hero {
+    width: 100%;
+    padding: 32px 0 0;
+  }
+
+  .trims {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 767px) {
@@ -729,5 +806,22 @@ a {
 
   .section--features {
     padding-top: var(--section-padding);
+  }
+
+  .stats-row,
+  .trims {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .section--model-hero {
+    padding-top: 24px;
+  }
+
+  .compare__table--simple .compare__col-spec {
+    width: 55%;
+  }
+
+  .compare__table--simple td {
+    padding-inline: 8px;
   }
 }
