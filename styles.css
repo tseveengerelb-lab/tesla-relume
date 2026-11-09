@@ -699,6 +699,23 @@ a {
   letter-spacing: 0.01em;
 }
 
+/* Three values share a row, so they scale with the viewport (72px at 1440). */
+.stats-row .stat__value {
+  font-size: clamp(var(--heading-2), 5vw, var(--heading-1));
+}
+
+.stats-row--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.trims--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.trims--5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
 /* These breakpoints are adaptations, not built from the Figma "Home • Mobile" frame. */
 @media (max-width: 1100px) {
   :root {
@@ -813,6 +830,10 @@ a {
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .stats-row .stat__value {
+    font-size: 48px;
+  }
+
   .section--model-hero {
     padding-top: 24px;
   }
@@ -823,5 +844,193 @@ a {
 
   .compare__table--simple td {
     padding-inline: 8px;
+  }
+}
+
+/*
+ * Tesla theme: colours and motion for every page (class="theme-tesla" on <html>).
+ * Values follow third-party measurements of tesla.com (shadcn.io/design/tesla,
+ * aiwebstyle.com/styles/tesla): white canvas, #171a20/#393c41 text, a single
+ * #3e6ae1 accent for primary actions, colour-only transitions of 0.33s on
+ * cubic-bezier(0.5, 0, 0, 0.75), and a nav that turns to rgba(255,255,255,.75)
+ * frosted glass once the page scrolls. Layout and type stay the site's own.
+ */
+html.theme-tesla {
+  color-scheme: light;
+  scroll-padding-top: 88px;
+  --color-background: #fff;
+  --color-foreground: #f4f4f4;
+  --color-text: #171a20;
+  --color-body: #393c41;
+  --color-border: #d0d1d2;
+  --color-azure: #3e6ae1;
+  --color-white-20: #d0d1d2;
+  --color-white-60: #8e8e8e;
+  --tesla-ease: cubic-bezier(0.5, 0, 0, 0.75);
+  --tesla-duration: 0.33s;
+}
+
+.theme-tesla .text-medium,
+.theme-tesla .text-regular,
+.theme-tesla .stat__label,
+.theme-tesla .compare__model-price,
+.theme-tesla .compare__table tbody th {
+  color: var(--color-body);
+}
+
+/* Text over the darkened home hero photo stays white, as on tesla.com heroes. */
+.theme-tesla .hero,
+.theme-tesla .hero .text-medium {
+  color: #fff;
+}
+
+/* Buttons: colour, background and border fade; the focus ring grows inward. */
+.theme-tesla .btn {
+  transition:
+    border-color var(--tesla-duration) var(--tesla-ease),
+    background-color var(--tesla-duration) var(--tesla-ease),
+    color var(--tesla-duration) var(--tesla-ease),
+    box-shadow 0.25s var(--tesla-ease);
+  box-shadow: inset 0 0 0 0 transparent;
+}
+
+.theme-tesla .btn:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px currentColor;
+}
+
+.theme-tesla .btn--primary {
+  color: #fff;
+}
+
+.theme-tesla .btn--primary:hover {
+  background: color-mix(in srgb, var(--color-azure) 88%, #000);
+  border-color: color-mix(in srgb, var(--color-azure) 88%, #000);
+}
+
+.theme-tesla .btn--secondary {
+  background: #f4f4f4;
+  color: var(--color-body);
+}
+
+.theme-tesla .btn--secondary:hover {
+  background: #eee;
+  color: var(--color-text);
+}
+
+/* On a #f4f4f4 card the secondary button switches to Tesla's white fill. */
+.theme-tesla .trim .btn--secondary {
+  background: #fff;
+}
+
+.theme-tesla .trim .btn--secondary:hover {
+  background: #eee;
+}
+
+/* Navigation: sticky, highlighted items, frosted glass after scrolling. */
+.theme-tesla .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: rgb(255 255 255 / 75%);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+@supports (animation-timeline: scroll()) {
+  .theme-tesla .navbar {
+    animation: tesla-nav-frost linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0 72px;
+  }
+}
+
+@keyframes tesla-nav-frost {
+  from {
+    background-color: rgb(255 255 255 / 0%);
+    -webkit-backdrop-filter: blur(0);
+    backdrop-filter: blur(0);
+  }
+
+  to {
+    background-color: rgb(255 255 255 / 75%);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+}
+
+.theme-tesla .navbar__logo img {
+  filter: brightness(0);
+}
+
+.theme-tesla .navbar__links {
+  gap: 0;
+}
+
+.theme-tesla .navbar__links a {
+  padding: 4px 16px;
+  border-radius: 4px;
+  transition:
+    color var(--tesla-duration) var(--tesla-ease),
+    background-color var(--tesla-duration) var(--tesla-ease);
+}
+
+.theme-tesla .navbar__links a:hover,
+.theme-tesla .navbar__links a[aria-current="page"] {
+  background-color: rgb(23 26 32 / 5%);
+  text-decoration: none;
+}
+
+/* Text links underline through an animated inset shadow. */
+.theme-tesla .checkbox a {
+  text-decoration: none;
+  box-shadow: inset 0 -1px 0 0 currentColor;
+  transition: box-shadow var(--tesla-duration) var(--tesla-ease);
+}
+
+.theme-tesla .checkbox a:hover {
+  box-shadow: inset 0 -2px 0 0 currentColor;
+}
+
+/* Form fields fade their underline colour. */
+.theme-tesla .field input,
+.theme-tesla .textarea {
+  transition: border-color var(--tesla-duration) var(--tesla-ease);
+}
+
+.theme-tesla .checkbox input {
+  border-color: var(--color-border);
+  transition:
+    background-color var(--tesla-duration) var(--tesla-ease),
+    border-color var(--tesla-duration) var(--tesla-ease);
+}
+
+.theme-tesla .checkbox input:checked {
+  background-color: var(--color-azure);
+  border-color: var(--color-azure);
+}
+
+/* The white SVG icons render dark on the light canvas. */
+.theme-tesla .compare__table td img,
+.theme-tesla .textarea__grip img,
+.theme-tesla .btn--link img {
+  filter: brightness(0);
+}
+
+@media (max-width: 767px) {
+  html.theme-tesla {
+    scroll-padding-top: 112px;
+  }
+
+  .theme-tesla .navbar__links a {
+    padding: 4px 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-tesla *,
+  .theme-tesla .navbar {
+    transition: none !important;
+    animation: none !important;
   }
 }

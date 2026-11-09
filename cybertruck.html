@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="mn" class="theme-tesla">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cybertruck | Улаанбаатарт Tesla-гаа сонгоорой</title>
+    <meta
+      name="description"
+      content="Cybertruck пикапын хувилбар, үнэ, үзүүлэлтийг үзэж, туршиж жолоодоод, Улаанбаатарт захиалгаа өгөөрэй."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="navbar__inner">
+        <div class="navbar__side">
+          <a class="navbar__logo" href="index.html">
+            <img src="assets/icons/main%20logo.svg" alt="Tesla" />
+          </a>
+        </div>
+        <nav class="navbar__links" aria-label="Автомашинууд">
+          <a href="model-3.html">Model 3</a>
+          <a href="model-y.html">Model Y</a>
+          <a href="cybertruck.html" aria-current="page">Cybertruck</a>
+          <a href="roadster.html">Roadster</a>
+        </nav>
+        <div class="navbar__side navbar__side--end">
+          <a class="btn btn--primary btn--small" href="#">нэвтрэх</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- Hero -->
+      <section class="section section--model-hero">
+        <div class="container">
+          <div class="stats stats--reverse">
+            <div class="stats__media">
+              <img src="assets/images/cybertruck.jpg" alt="Цөлийн хадны дунд зогсож буй зэвэрдэггүй ган Cybertruck" />
+            </div>
+            <div class="model-hero">
+              <p class="tagline">Пикап</p>
+              <h1 class="heading-1">Cybertruck</h1>
+              <p class="text-medium">$69,990-с эхэлнэ. Зэвэрдэггүй ган их бие, хүчирхэг чирэх чадвар, Cyberbeast-д суперкарын хурд.</p>
+              <div class="actions">
+                <a class="btn btn--primary" href="#order">Захиалах</a>
+                <a class="btn btn--secondary" href="#test-drive">Туршиж жолоодох</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Key stats -->
+      <section class="section section--tight" aria-label="Гол үзүүлэлтүүд">
+        <div class="container">
+          <div class="stats-row">
+            <div class="stat">
+              <p class="stat__value">2.6–4.1 с</p>
+              <p class="stat__label">0–97 км/цаг, хувилбараар</p>
+            </div>
+            <div class="stat">
+              <p class="stat__value">523 км</p>
+              <p class="stat__label">Дээд явах зай, EPA</p>
+            </div>
+            <div class="stat">
+              <p class="stat__value">845 м.х.</p>
+              <p class="stat__label">Cyberbeast-ийн хүч</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trims -->
+      <section class="section" id="trims">
+        <div class="container">
+          <div class="section-title">
+            <h2 class="heading-2">Хувилбар ба үнэ</h2>
+          </div>
+          <div class="trims trims--3">
+            <article class="trim">
+              <h3 class="trim__name">AWD</h3>
+              <p class="trim__price">$69,990</p>
+              <a class="btn btn--secondary" href="#order">Захиалах</a>
+            </article>
+            <article class="trim">
+              <h3 class="trim__name">Premium AWD</h3>
+              <p class="trim__price">$79,990</p>
+              <a class="btn btn--secondary" href="#order">Захиалах</a>
+            </article>
+            <article class="trim">
+              <h3 class="trim__name">Cyberbeast</h3>
+              <p class="trim__price">$99,990</p>
+              <a class="btn btn--secondary" href="#order">Захиалах</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Specs -->
+      <section class="section" id="specs">
+        <div class="container">
+          <div class="section-title">
+            <h2 class="heading-2">Дэлгэрэнгүй үзүүлэлт</h2>
+          </div>
+          <div class="compare">
+            <table class="compare__table compare__table--simple">
+              <colgroup>
+                <col class="compare__col-spec" />
+                <col />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th class="compare__spec-title" scope="col">Үзүүлэлт</th>
+                  <th class="compare__model compare__highlight" scope="col">
+                    <span class="compare__model-name">Cybertruck</span>
+                    <span class="compare__model-price">$69,990-с эхэлнэ</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">0–97 км/цаг</th>
+                  <td class="compare__highlight">2.6–4.1 с (хувилбараар)</td>
+                </tr>
+                <tr>
+                  <th scope="row">Явах зай, EPA</th>
+                  <td class="compare__highlight">483–523 км</td>
+                </tr>
+                <tr>
+                  <th scope="row">Хүч</th>
+                  <td class="compare__highlight">845 м.х. (Cyberbeast)</td>
+                </tr>
+                <tr>
+                  <th scope="row">Их бие</th>
+                  <td class="compare__highlight">Зэвэрдэггүй ган пикап</td>
+                </tr>
+                <tr>
+                  <th scope="row">Бүх дугуйн хөтлөгчтэй хувилбартай</th>
+                  <td class="compare__highlight"><img src="assets/icons/check.svg" alt="Тийм" /></td>
+                </tr>
+                <tr>
+                  <th scope="row">Хойд дугуйн хөтлөгчтэй хувилбартай</th>
+                  <td class="compare__highlight"><img src="assets/icons/close.svg" alt="Үгүй" /></td>
+                </tr>
+                <tr>
+                  <th scope="row">Програм хангамжийн алсын шинэчлэлт</th>
+                  <td class="compare__highlight"><img src="assets/icons/check.svg" alt="Тийм" /></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <a class="btn btn--secondary" href="index.html#compare">Бүх загварыг харьцуулах</a>
+        </div>
+      </section>
+
+      <!-- Test drive -->
+      <section class="section" id="test-drive">
+        <div class="container">
+          <div class="cta">
+            <h2 class="heading-2 cta__title">ТУРШИЖ ЖОЛООДОХ</h2>
+            <div class="cta__body">
+              <ul class="cta__steps text-medium">
+                <li>Цагаа товлох: өөрт тохирох өдөр, цагаа сонгоно</li>
+                <li>Үнэмлэхээ авчрах: хүчинтэй жолоочийн үнэмлэх л хангалттай</li>
+                <li>Жолоогоо барих: таныг ирэхэд машин цэнэглэгдсэн, бэлэн байна</li>
+              </ul>
+              <div class="actions">
+                <a class="btn btn--primary" href="#order">ТИЙМ</a>
+                <a class="btn btn--secondary" href="#order">ОДОО АВАХ</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Order -->
+      <section class="section" id="order">
+        <div class="container">
+          <div class="section-title">
+            <p class="tagline">Захиалга</p>
+            <div class="section-title__content">
+              <h2 class="heading-2">Cybertruck захиалах</h2>
+              <p class="text-medium">Мэдээллээ үлдээгээрэй. Захиалгыг тань баталгаажуулахаар бүтээгдэхүүний мэргэжилтэн тантай холбогдоно.</p>
+            </div>
+          </div>
+          <form class="form" action="#" method="post">
+            <input type="hidden" name="model" value="Cybertruck" />
+            <div class="field">
+              <label for="full-name">Овог нэр</label>
+              <input id="full-name" name="full-name" type="text" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="email">И-мэйл</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div class="field">
+              <label for="zip">Шуудангийн код</label>
+              <div class="textarea">
+                <textarea id="zip" name="zip" placeholder="ж.нь 94301" autocomplete="postal-code" required></textarea>
+                <span class="textarea__grip textarea__grip--inner"><img src="assets/icons/resize-line-1.svg" alt="" /></span>
+                <span class="textarea__grip textarea__grip--outer"><img src="assets/icons/resize-line-2.svg" alt="" /></span>
+              </div>
+            </div>
+            <div class="checkbox">
+              <input id="terms" name="terms" type="checkbox" required />
+              <label for="terms"><a href="#">Үйлчилгээний нөхцөл</a>-ийг зөвшөөрч байна</label>
+            </div>
+            <button class="btn btn--primary" type="submit">Захиалга өгөх</button>
+          </form>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
