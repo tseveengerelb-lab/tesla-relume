@@ -39,12 +39,13 @@ export default function HomePage() {
         {/* The Figma frame keeps an empty 24px tagline and its 16px gap above the title. */}
         <SectionTitle title="Бүх загварыг харьцуулах" className="pt-10" />
         <CompareTable headers={homeCompare.headers} rows={homeCompare.rows} />
+        {/* Prägnanz: every control says what it does; no placeholder buttons. */}
         <Actions className="items-center gap-6">
-          <ButtonLink href="#" variant="secondary">
-            Товч
+          <ButtonLink href="#order" variant="secondary">
+            Захиалах
           </ButtonLink>
-          <ButtonLink href="#" variant="link">
-            Товч
+          <ButtonLink href="#test-drive" variant="link">
+            Туршиж жолоодох
             <Image src="/icons/chevron-right.svg" alt="" width={24} height={24} unoptimized className="brightness-0" />
           </ButtonLink>
         </Actions>

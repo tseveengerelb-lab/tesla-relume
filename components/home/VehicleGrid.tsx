@@ -11,14 +11,17 @@ export async function VehicleGrid() {
   return (
     <Section id="vehicles">
       <SectionTitle title="Автомашинууд" />
-      <div className="grid w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-        {cards.map((card) => (
-          <ProductCard key={card.slug} card={card} />
-        ))}
+      {/* Proximity: the compare button belongs to the cards, so it sits closer (48px) than the title does (80px). */}
+      <div className="flex w-full flex-col items-center gap-12">
+        <div className="grid w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+          {cards.map((card) => (
+            <ProductCard key={card.slug} card={card} />
+          ))}
+        </div>
+        <ButtonLink href="#compare" variant="secondary">
+          Бүх загварыг харьцуулах
+        </ButtonLink>
       </div>
-      <ButtonLink href="#compare" variant="secondary">
-        Бүх загварыг харьцуулах
-      </ButtonLink>
     </Section>
   );
 }

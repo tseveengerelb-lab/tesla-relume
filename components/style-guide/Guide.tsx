@@ -6,6 +6,7 @@ export const guideSections = [
   { id: "colors", title: "Өнгө" },
   { id: "typography", title: "Типографи" },
   { id: "layout", title: "Зай ба layout" },
+  { id: "gestalt", title: "Gestalt зарчим" },
   { id: "shape", title: "Хэлбэр ба хөдөлгөөн" },
   { id: "buttons", title: "Товч" },
   { id: "forms", title: "Форм" },

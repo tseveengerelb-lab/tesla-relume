@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { features, homeCompare, orderDescription, showcases, testDriveSteps } from "@/data/content";
+import { features, homeCompare, homeTestDriveSteps, orderDescription, showcases, testDriveSteps } from "@/data/content";
 import { requireModel } from "@/data/models";
 import { toProductCard } from "@/data/product-cards";
 import { breakpoints, colorGroups, containers, gapScale, spacingTokens, typeScale } from "@/data/design-tokens";
@@ -15,7 +15,15 @@ import { TrimCard, TrimGrid } from "@/components/model/TrimGrid";
 import { CompareTable } from "@/components/shared/CompareTable";
 import { FeatureCard, FeatureList } from "@/components/shared/Features";
 import { OrderForm } from "@/components/shared/OrderForm";
-import { TestDriveCta } from "@/components/shared/TestDriveCta";
+import { TestDriveCta, TestDriveSteps } from "@/components/shared/TestDriveCta";
+import {
+  CommonRegionDiagram,
+  ConnectednessDiagram,
+  GestaltLaw,
+  PragnanzDiagram,
+  ProximityDiagram,
+  SimilarityDiagram,
+} from "@/components/style-guide/Gestalt";
 import {
   ChipNav,
   Code,
@@ -309,7 +317,123 @@ export default function StyleGuidePage() {
                 </div>
               </GuideSection>
 
-              {/* 05 Shape & motion */}
+              {/* 05 Gestalt */}
+              <GuideSection
+                id="gestalt"
+                description="Хүн юмсыг тус тусад нь биш, бүлгээр нь хардаг. Gestalt-ийн таван хууль нь юу юутай холбоотойг үг, тэмдэглэгээгүйгээр ойлгуулна. Доорх жишээ бүр сайтад ашиглагдаж буй жинхэнэ компонент."
+              >
+                <div className="flex flex-col gap-10">
+                  <GestaltLaw
+                    name="Law of Proximity"
+                    title="Ойрын хууль"
+                    definition="Ойр байрласан зүйлсийг нэг бүлэг гэж хардаг. Зай нь хүрээ, зураасгүйгээр бүлэглэнэ."
+                    diagram={<ProximityDiagram />}
+                    usage={[
+                      "Карт доторх зай (16px) картуудын хоорондох зайнаас (32px) бага тул зураг, нэр, үнэ нэг машиных болж харагдана.",
+                      "Хэсгийн гарчиг агуулгаасаа 80px, харин «Бүх загварыг харьцуулах» товч картуудаас 48px зайтай.",
+                      "Дотоод зай гаднах зайнаасаа үргэлж бага байна.",
+                    ]}
+                  >
+                    <Specimen caption="Карт дотор gap-4 · картуудын хооронд gap-8" code="<ProductCard />">
+                      <div className="mx-auto grid max-w-[560px] grid-cols-2 gap-8">
+                        <ProductCard card={toProductCard(model3)} />
+                        <ProductCard card={toProductCard(modelY)} />
+                      </div>
+                    </Specimen>
+                  </GestaltLaw>
+
+                  <GestaltLaw
+                    name="Law of Common Region"
+                    title="Нийтлэг талбайн хууль"
+                    definition="Нэг дэвсгэр, нэг хүрээн дотор байгаа зүйлсийг нэг бүлэг гэж хардаг. Зай хангалтгүй үед хамгийн хүчтэй бүлэглэгч."
+                    diagram={<CommonRegionDiagram />}
+                    usage={[
+                      "Хувилбарын карт: нэр, үнэ, товч нэг Surface дэвсгэр дээр.",
+                      "Харьцуулах хүснэгтийн эхний загварын багана Surface өнгөөр нэг талбай болно.",
+                      "Талбайг сүүдэр, хүрээгээр биш, зөвхөн Surface өнгөөр үүсгэнэ.",
+                    ]}
+                  >
+                    <Specimen caption="Нэг карт = нэг сонголт" code="bg-surface rounded-lg">
+                      <div className="grid gap-6 md:grid-cols-2">
+                        {modelY.trims?.slice(0, 2).map((trim) => (
+                          <TrimCard key={trim.name} trim={trim} />
+                        ))}
+                      </div>
+                    </Specimen>
+                  </GestaltLaw>
+
+                  <GestaltLaw
+                    name="Law of Similarity"
+                    title="Ижил төстэй байдлын хууль"
+                    definition="Өнгө, хэлбэр, хэмжээгээрээ ижил зүйлсийг ижил үүрэгтэй гэж хардаг."
+                    diagram={<SimilarityDiagram />}
+                    usage={[
+                      "Indigo өнгө зөвхөн үндсэн үйлдэлд. Хаана ч харагдсан «энийг дар» гэсэн утгатай.",
+                      "Ижил төрлийн мэдээлэл ижил загвартай: бүх үнэ Semibold, бүх үзүүлэлт Stat компонентоор.",
+                      "Өөр үүрэгтэй зүйлийг ижил харагдуулахгүй: link товч саарал дэвсгэргүй.",
+                    ]}
+                  >
+                    <Specimen caption="Хоёр өөр хуудасны товчны хослол, ижил дүрэм" code="<Actions>">
+                      <div className="flex flex-col items-center gap-6">
+                        <Actions>
+                          <ButtonLink href="#gestalt">Захиалах</ButtonLink>
+                          <ButtonLink href="#gestalt" variant="secondary">
+                            Загвар харьцуулах
+                          </ButtonLink>
+                        </Actions>
+                        <Actions>
+                          <ButtonLink href="#gestalt">Урьдчилан захиалах</ButtonLink>
+                          <ButtonLink href="#gestalt" variant="secondary">
+                            Бусад загвар
+                          </ButtonLink>
+                        </Actions>
+                      </div>
+                    </Specimen>
+                  </GestaltLaw>
+
+                  <GestaltLaw
+                    name="Law of Uniform Connectedness"
+                    title="Нэгдмэл холбоосын хууль"
+                    definition="Шугамаар эсвэл өнгөөр холбогдсон зүйлсийг зай, хэлбэрээс илүү хүчтэй бүлэг гэж хардаг."
+                    diagram={<ConnectednessDiagram />}
+                    usage={[
+                      "Туршиж жолоодох алхмууд нэг босоо шугамаар холбогдсон тул нэг дараалал болж уншигдана.",
+                      "Нүүр хуудасны карт бүхэлдээ нэг холбоос: зураг, нэр, үнийн аль нь ч загварын хуудас руу хүргэнэ.",
+                    ]}
+                  >
+                    <Specimen caption="components/shared/TestDriveCta.tsx" code="<TestDriveSteps steps />">
+                      <div className="mx-auto max-w-[480px]">
+                        <TestDriveSteps steps={homeTestDriveSteps} />
+                      </div>
+                    </Specimen>
+                  </GestaltLaw>
+
+                  <GestaltLaw
+                    name="Law of Prägnanz"
+                    title="Энгийн хэлбэрийн хууль"
+                    definition="Хүн нарийн дүрсийг хамгийн энгийн хэлбэрээр нь ойлгодог. Энгийн байх тусам хурдан уншигдана."
+                    diagram={<PragnanzDiagram />}
+                    usage={[
+                      "Тэгш өнцөгт товч, 8px булан, нэг фонт, нэг онцлох өнгө. Сүүдэр, градиент хэрэглэхгүй.",
+                      "Утгагүй элемент байхгүй: «Товч» гэх мэт placeholder-ийн оронд «Захиалах», «Туршиж жолоодох».",
+                      "Нэг хэсэгт нэг санаа, нэг үндсэн үйлдэл.",
+                    ]}
+                  >
+                    <div className="grid gap-6 md:grid-cols-2">
+                      <Specimen caption="Хэрэглэхгүй · градиент, сүүдэр, утгагүй текст" className="flex h-40 items-center justify-center">
+                        <span className="rounded-full bg-gradient-to-r from-accent to-fuchsia-500 px-6 py-2.5 font-semibold text-white shadow-lg shadow-accent/40">
+                          ✨ Товч ✨
+                        </span>
+                      </Specimen>
+                      <Specimen caption="Хэрэглэнэ · хавтгай, тодорхой үйл үг" className="flex h-40 items-center justify-center">
+                        <ButtonLink href="#gestalt">Захиалах</ButtonLink>
+                      </Specimen>
+                    </div>
+                  </GestaltLaw>
+                </div>
+              </GuideSection>
+
+              {/* 06 Shape & motion */}
               <GuideSection
                 id="shape"
                 description="Хэлбэр энгийн, булан зөөлөн. Хөдөлгөөн зөвхөн өнгөнд: шилжилт 0.33 секунд, нэг ижил муруйгаар. Хэрэглэгч хөдөлгөөн багасгахыг сонгосон бол бүх шилжилт унтарна."
@@ -358,7 +482,7 @@ export default function StyleGuidePage() {
                 </div>
               </GuideSection>
 
-              {/* 06 Buttons */}
+              {/* 07 Buttons */}
               <GuideSection
                 id="buttons"
                 description="Товч тэгш өнцөгт, Medium жинтэй. Үндсэн үйлдэлд indigo, бусдад саарал. Focus хийхэд дотогшоо 2px цагираг гарна."
@@ -434,7 +558,7 @@ export default function StyleGuidePage() {
                 />
               </GuideSection>
 
-              {/* 07 Forms */}
+              {/* 08 Forms */}
               <GuideSection
                 id="forms"
                 description="Талбар нь зөвхөн доод зураастай, хүрээгүй. Focus хийхэд зураас Ink өнгөтэй болно. Шошго үргэлж талбарын дээр харагдана."
@@ -461,7 +585,7 @@ export default function StyleGuidePage() {
                 </Specimen>
               </GuideSection>
 
-              {/* 08 Icons */}
+              {/* 09 Icons */}
               <GuideSection
                 id="icons"
                 description="24px, нимгэн шугаман дүрс. SVG файлууд цагаан өнгөтэй тул цагаан дэвсгэр дээр brightness-0 классаар харлуулна."
@@ -492,7 +616,7 @@ export default function StyleGuidePage() {
                 </div>
               </GuideSection>
 
-              {/* 09 Components */}
+              {/* 10 Components */}
               <GuideSection
                 id="components"
                 description="Хуудсууд эдгээр компонентоос бүтнэ. Өгөгдөл нь data/ хавтаснаас ирдэг тул компонентын кодыг өөрчлөхгүйгээр контент шинэчилнэ."
@@ -555,7 +679,7 @@ export default function StyleGuidePage() {
                 </div>
               </GuideSection>
 
-              {/* 10 Page patterns */}
+              {/* 11 Page patterns */}
               <GuideSection
                 id="patterns"
                 description="Компонентуудаас бүтсэн бүтэн хэсгүүд. Энд 60%-иар жижигрүүлж харуулсан; сайт дээр бүтэн өргөнөөрөө байрлана. Хэсэг бүр Section дотор, 1280px төвлөрсөн баганатай."
@@ -654,7 +778,7 @@ export default function StyleGuidePage() {
                 </div>
               </GuideSection>
 
-              {/* 11 Imagery */}
+              {/* 12 Imagery */}
               <GuideSection
                 id="imagery"
                 description="Машиныг байгалийн гэрэлд, бодит орчинд харуулсан гэрэл зураг. Зураг бүр 8px булантай, бүтэн өргөнтэй hero-оос бусад нь. Зургийн дээр текст тавих бол 40% хар давхарга нэмнэ."
