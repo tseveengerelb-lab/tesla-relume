@@ -60,7 +60,7 @@ export const typeScale: TypeToken[] = [
   { name: "Heading 2", className: "text-h2", size: "52 / 44 / 32", meta: "Medium 500 · 1.2 · +0.01em", sample: "Хувилбар ба үнэ", usage: "Хэсгийн гарчиг (h2)" },
   { name: "Heading 5", className: "text-h5", size: "28 / 28 / 24", meta: "Medium 500 · 1.4 · +0.01em", sample: "$54,990", usage: "Картын гарчиг, хувилбарын үнэ" },
   { name: "Heading 6", className: "text-h6", size: "22", meta: "Medium 500 · 1.4 · +0.01em", sample: "Явах зай, EPA", usage: "Үзүүлэлтийн шошго" },
-  { name: "Large", className: "text-lg font-semibold", size: "22", meta: "Semibold 600 · 1.6", sample: "$36,990-с эхэлнэ", usage: "Картын үнэ, хүснэгтийн толгой" },
+  { name: "Large", className: "text-lg font-semibold", size: "22", meta: "Semibold 600 · 1.6", sample: "$36,990-с эхэлнэ", usage: "Картын үнэ. Хүснэгтийн толгойд Bold 700-аар" },
   { name: "Medium", className: "text-md", size: "18", meta: "Regular 400 · 1.6", sample: "Бүх хувилбар нь хурдан, Performance нь уралдааны замд бэлэн.", usage: "Гарчгийн доорх тайлбар" },
   { name: "Regular", className: "text-base", size: "16", meta: "Regular 400 · 1.6", sample: "Урд суудлууд нь халаалт, агааржуулалттай.", usage: "Үндсэн текст, товч" },
   { name: "Small", className: "text-sm", size: "14", meta: "Regular 400 · 1.6", sample: "Спорт седан · 0–97 км/цаг 2.9 секундэд", usage: "Картын тайлбар, checkbox" },

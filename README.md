@@ -19,6 +19,18 @@ npm run dev      # http://localhost:3000
 | `npm run build` | Production build (TypeScript шалгалт орсон) |
 | `npm run start` | Build хийсэн хувилбарыг ажиллуулах           |
 
+## Өгөгдлийн сан (Supabase)
+
+Нүүр хуудасны машины картууд (нэр, тайлбар, үнэ, зураг) Supabase-ийн `models` хүснэгтээс уншигдана.
+
+1. supabase.com дээр project үүсгэнэ.
+2. **SQL Editor** дээр `supabase/migrations/20261112000000_create_models.sql`-ийн агуулгыг ажиллуулна. Хүснэгт, унших эрх (RLS), эхний 4 мөр үүснэ.
+3. Зураг: **Storage → New bucket** хэсэгт `images` нэртэй **Public** bucket үүсгэж, `public/images/`-ээс `model-3.jpg`, `model-y.jpg`, `cybertruck.jpg`, `roadster.jpg`-г upload хийнэ. Дараа нь `supabase/migrations/20261112000100_card_images_storage.sql`-ийг SQL Editor дээр ажиллуулна. Шинэ зураг солихдоо файлаа bucket-д хийгээд `models.image_url`-д түүний public URL-ийг бичнэ.
+4. `.env.example`-ийг `.env.local` нэрээр хуулж, **Project Settings → API Keys** хэсгээс URL болон publishable key-г бөглөнө.
+5. Vercel дээр **Settings → Environment Variables** хэсэгт ижил хоёр хувьсагчийг нэмээд Redeploy хийнэ.
+
+Supabase тохируулаагүй эсвэл холбогдож чадахгүй үед сайт `data/models.ts`-ийн өгөгдлийг ашиглаж, server log-д анхааруулга бичнэ. Сан дахь өөрчлөлт нүүр хуудсанд 1 минутын дотор гарна (`revalidate = 60`).
+
 ## Хуудаснууд
 
 | Хаяг          | Файл                    |
@@ -58,7 +70,8 @@ public/
 
 Текст, үнэ, үзүүлэлтийг component дотор биш, `data/` хавтсанд засна.
 
-- **Загварын үнэ, хувилбар, үзүүлэлт:** `data/models.ts`. Нүүр хуудасны карт, загварын хуудас, navbar бүгд эндээс өгөгдлөө авна.
+- **Нүүр хуудасны машины карт:** Supabase-ийн `models` хүснэгтэд засна (Table Editor).
+- **Загварын хуудасны үнэ, хувилбар, үзүүлэлт:** `data/models.ts`. Загварын хуудас, navbar эндээс өгөгдлөө авна.
 - **Шинэ загвар нэмэх:** `models` массивт шинэ объект нэмнэ. Хуудас, navbar-ийн холбоос, нүүр хуудасны карт автоматаар үүснэ. Зургийг `public/images/`-д хийнэ.
 - **Хэсгүүдийг нуух:** `trims`, `specs` байхгүй бол тэр хэсэг харагдахгүй. `showFeatures: true` бол "Онцлог" хэсэг гарна. `preorder: true` бол туршиж жолоодох хэсэг нуугдаж, захиалга урьдчилсан захиалга болно (Roadster).
 - **Нүүр хуудасны загварын хэсгүүд, онцлог, харьцуулах хүснэгт, туршиж жолоодох алхмууд:** `data/content.ts`.

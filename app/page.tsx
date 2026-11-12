@@ -11,6 +11,10 @@ import { Actions, ButtonLink } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 
+// The vehicle cards come from Supabase; rebuild this page at most once a minute
+// so edits in the database show up without a redeploy.
+export const revalidate = 60;
+
 export default function HomePage() {
   return (
     <>

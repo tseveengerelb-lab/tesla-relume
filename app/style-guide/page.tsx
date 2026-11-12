@@ -1,13 +1,33 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { features } from "@/data/content";
+import { features, homeCompare, orderDescription, showcases, testDriveSteps } from "@/data/content";
 import { requireModel } from "@/data/models";
+import { toProductCard } from "@/data/product-cards";
 import { breakpoints, colorGroups, containers, gapScale, spacingTokens, typeScale } from "@/data/design-tokens";
+import { Hero } from "@/components/home/Hero";
+import { ModelShowcase } from "@/components/home/ModelShowcase";
 import { ProductCard } from "@/components/home/ProductCard";
-import { TrimCard } from "@/components/model/TrimGrid";
+import { VehicleGrid } from "@/components/home/VehicleGrid";
+import { Navbar } from "@/components/layout/Navbar";
+import { ModelHero } from "@/components/model/ModelHero";
+import { StatsRow } from "@/components/model/StatsRow";
+import { TrimCard, TrimGrid } from "@/components/model/TrimGrid";
 import { CompareTable } from "@/components/shared/CompareTable";
-import { FeatureCard } from "@/components/shared/Features";
-import { ChipNav, Code, GuideSection, Rules, SideNav, Specimen, SubHeading } from "@/components/style-guide/Guide";
+import { FeatureCard, FeatureList } from "@/components/shared/Features";
+import { OrderForm } from "@/components/shared/OrderForm";
+import { TestDriveCta } from "@/components/shared/TestDriveCta";
+import {
+  ChipNav,
+  Code,
+  GuideSection,
+  Preview,
+  Rules,
+  SideNav,
+  Specimen,
+  SubHeading,
+} from "@/components/style-guide/Guide";
+import { Section } from "@/components/ui/Section";
+import { SectionTitle } from "@/components/ui/SectionTitle";
 import { BoolIcon } from "@/components/ui/BoolIcon";
 import { Actions, Button, ButtonLink } from "@/components/ui/Button";
 import { Checkbox, TextAreaField, TextField, TextLink } from "@/components/ui/Field";
@@ -492,7 +512,7 @@ export default function StyleGuidePage() {
                     <SubHeading>Загварын карт</SubHeading>
                     <Specimen caption="components/home/ProductCard.tsx">
                       <div className="mx-auto max-w-[280px]">
-                        <ProductCard model={model3} />
+                        <ProductCard card={toProductCard(model3)} />
                       </div>
                     </Specimen>
                   </div>
@@ -524,9 +544,117 @@ export default function StyleGuidePage() {
                     />
                   </Specimen>
                 </div>
+                <div>
+                  <SubHeading>Харьцуулах хүснэгт</SubHeading>
+                  <Specimen
+                    caption="Нүүр хуудас · Figma-гийн дагуу 2 загварын толгой, 3 утгын багана"
+                    code="homeCompare"
+                  >
+                    <CompareTable headers={homeCompare.headers} rows={homeCompare.rows} />
+                  </Specimen>
+                </div>
               </GuideSection>
 
-              {/* 10 Imagery */}
+              {/* 10 Page patterns */}
+              <GuideSection
+                id="patterns"
+                description="Компонентуудаас бүтсэн бүтэн хэсгүүд. Энд 60%-иар жижигрүүлж харуулсан; сайт дээр бүтэн өргөнөөрөө байрлана. Хэсэг бүр Section дотор, 1280px төвлөрсөн баганатай."
+              >
+                <div>
+                  <SubHeading>Хэсгийн гарчиг</SubHeading>
+                  <div className="grid gap-6 md:grid-cols-2">
+                    <Specimen caption="Tagline, гарчиг, тайлбар" code="<SectionTitle tagline description />">
+                      <SectionTitle
+                        tagline="Захиалга"
+                        title="Model 3 захиалах"
+                        description="Мэдээллээ үлдээгээрэй. Мэргэжилтэн тантай холбогдоно."
+                      />
+                    </Specimen>
+                    <Specimen caption="Зөвхөн гарчиг" code="<SectionTitle title />" className="flex items-center">
+                      <SectionTitle title="Хувилбар ба үнэ" />
+                    </Specimen>
+                  </div>
+                </div>
+                <div>
+                  <SubHeading>Цэс</SubHeading>
+                  <Preview
+                    caption="components/layout/Navbar.tsx · бүх хуудсанд, дээд талд наалддаг"
+                    code="<Navbar />"
+                    className="[&_header]:static"
+                  >
+                    <Navbar />
+                  </Preview>
+                </div>
+                <div>
+                  <SubHeading>Нүүр хуудасны hero</SubHeading>
+                  <Preview caption="components/home/Hero.tsx · нүүр хуудас" code="<Hero />">
+                    <Hero />
+                  </Preview>
+                </div>
+                <div>
+                  <SubHeading>Загварын hero</SubHeading>
+                  <Preview caption="components/model/ModelHero.tsx · загвар бүрийн хуудас" code="<ModelHero model />">
+                    <ModelHero model={modelY} />
+                  </Preview>
+                </div>
+                <div>
+                  <SubHeading>Зураг ба үзүүлэлт</SubHeading>
+                  <Preview
+                    caption="components/home/ModelShowcase.tsx · нүүр хуудас, reverse-ээр ээлжилнэ"
+                    code="<ModelShowcase showcase />"
+                  >
+                    <ModelShowcase showcase={showcases[0]} />
+                  </Preview>
+                </div>
+                <div>
+                  <SubHeading>Үзүүлэлтийн мөр</SubHeading>
+                  <Preview caption="components/model/StatsRow.tsx · 2 эсвэл 3 багана" code="<StatsRow stats label />">
+                    <div className="py-16">
+                      <StatsRow stats={model3.stats} label="Гол үзүүлэлтүүд" />
+                    </div>
+                  </Preview>
+                </div>
+                <div>
+                  <SubHeading>Картын сүлжээ</SubHeading>
+                  <div className="flex flex-col gap-8">
+                    <Preview caption="components/home/VehicleGrid.tsx · 4 / 2 / 1 багана" code="<VehicleGrid />">
+                      <VehicleGrid />
+                    </Preview>
+                    <Preview
+                      caption="components/model/TrimGrid.tsx · хувилбарын тоогоор 3–5 / 2 / 1 багана"
+                      code="<TrimGrid trims />"
+                    >
+                      <TrimGrid trims={modelY.trims ?? []} />
+                    </Preview>
+                    <Preview caption="components/shared/Features.tsx · 3 / 1 багана" code="<FeatureList />">
+                      <Section>
+                        <SectionTitle title="Онцлог" />
+                        <FeatureList />
+                      </Section>
+                    </Preview>
+                  </div>
+                </div>
+                <div>
+                  <SubHeading>Туршиж жолоодох</SubHeading>
+                  <Preview
+                    caption="components/shared/TestDriveCta.tsx · Roadster-оос бусад хуудас"
+                    code="<TestDriveCta steps />"
+                  >
+                    <TestDriveCta steps={testDriveSteps} />
+                  </Preview>
+                </div>
+                <div>
+                  <SubHeading>Захиалгын форм</SubHeading>
+                  <Preview
+                    caption="components/shared/OrderForm.tsx · хуудас бүрийн төгсгөлд"
+                    code="<OrderForm title description />"
+                  >
+                    <OrderForm title="Model 3 захиалах" description={orderDescription} model="Model 3" />
+                  </Preview>
+                </div>
+              </GuideSection>
+
+              {/* 11 Imagery */}
               <GuideSection
                 id="imagery"
                 description="Машиныг байгалийн гэрэлд, бодит орчинд харуулсан гэрэл зураг. Зураг бүр 8px булантай, бүтэн өргөнтэй hero-оос бусад нь. Зургийн дээр текст тавих бол 40% хар давхарга нэмнэ."

@@ -26,6 +26,15 @@ export type CompareHeader = {
   price: string;
 };
 
+/** What a home page vehicle card shows; read from the Supabase `models` table. */
+export type ProductCardData = {
+  slug: string;
+  name: string;
+  description: string;
+  price: string;
+  image: ImageRef;
+};
+
 export type Feature = {
   title: string;
   description: string;

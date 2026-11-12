@@ -11,6 +11,7 @@ export const guideSections = [
   { id: "forms", title: "Форм" },
   { id: "icons", title: "Дүрс" },
   { id: "components", title: "Компонент" },
+  { id: "patterns", title: "Хуудасны хэсэг" },
   { id: "imagery", title: "Зураг" },
 ] as const;
 
@@ -79,6 +80,42 @@ export function Specimen({
           {code && <Code>{code}</Code>}
         </figcaption>
       )}
+    </figure>
+  );
+}
+
+/**
+ * A whole page section shown like a small browser window: on desktop it is
+ * zoomed to 60% so the section lays out at full desktop width. `inert` keeps
+ * its links, fields and landmarks out of the style guide's own focus order.
+ */
+export function Preview({
+  caption,
+  code,
+  className,
+  children,
+}: {
+  caption: string;
+  code?: string;
+  className?: string;
+  children: ReactNode;
+}) {
+  return (
+    <figure className="flex min-w-0 flex-col gap-3">
+      <div className="overflow-hidden rounded-lg border border-line bg-white">
+        <div className="flex items-center gap-1.5 border-b border-line bg-surface px-4 py-2.5" aria-hidden>
+          <span className="size-2.5 rounded-full bg-line" />
+          <span className="size-2.5 rounded-full bg-line" />
+          <span className="size-2.5 rounded-full bg-line" />
+        </div>
+        <div inert className={cx("select-none lg:[zoom:0.6]", className)}>
+          {children}
+        </div>
+      </div>
+      <figcaption className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-body">
+        <span>{caption}</span>
+        {code && <Code>{code}</Code>}
+      </figcaption>
     </figure>
   );
 }
