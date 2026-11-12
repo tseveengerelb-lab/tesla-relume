@@ -25,7 +25,7 @@ npm run dev      # http://localhost:3000
 
 1. supabase.com дээр project үүсгэнэ.
 2. **SQL Editor** дээр `supabase/migrations/20261112000000_create_models.sql`-ийн агуулгыг ажиллуулна. Хүснэгт, унших эрх (RLS), эхний 4 мөр үүснэ.
-3. Зураг: **Storage → New bucket** хэсэгт `images` нэртэй **Public** bucket үүсгэж, `public/images/`-ээс `model-3.jpg`, `model-y.jpg`, `cybertruck.jpg`, `roadster.jpg`-г upload хийнэ. Дараа нь `supabase/migrations/20261112000100_card_images_storage.sql`-ийг SQL Editor дээр ажиллуулна. Шинэ зураг солихдоо файлаа bucket-д хийгээд `models.image_url`-д түүний public URL-ийг бичнэ.
+3. Зураг: **Storage → New bucket** хэсэгт `images` нэртэй **Public** bucket үүсгэж, `public/images/` хавтсыг бүхэлд нь чирж оруулна (файлууд bucket доторх `images/` хавтсанд орно). Дараа нь `supabase/migrations/20261112000100_card_images_storage.sql`-ийг SQL Editor дээр ажиллуулна. Шинэ зураг солихдоо файлаа bucket-ийн `images/` хавтсанд хийгээд `models.image_url`-д түүний public URL-ийг (**Get URL**) бичнэ.
 4. `.env.example`-ийг `.env.local` нэрээр хуулж, **Project Settings → API Keys** хэсгээс URL болон publishable key-г бөглөнө.
 5. Vercel дээр **Settings → Environment Variables** хэсэгт ижил хоёр хувьсагчийг нэмээд Redeploy хийнэ.
 

@@ -2,7 +2,8 @@
 -- Order:
 --   1. Run 20261112000000_create_models.sql.
 --   2. Storage → New bucket → name `images`, Public ON.
---   3. Upload model-3.jpg, model-y.jpg, cybertruck.jpg, roadster.jpg from public/images/.
+--   3. Drag the whole public/images/ folder into the bucket. The files land in an
+--      `images/` folder inside it: images/images/model-3.jpg, model-y.jpg, ...
 --   4. Run this file. It pins the bucket settings and switches the cards to Storage URLs;
 --      running it before step 3 would leave the cards with broken images.
 
@@ -14,7 +15,7 @@ on conflict (id) do update set
   file_size_limit    = excluded.file_size_limit,
   allowed_mime_types = excluded.allowed_mime_types;
 
--- Point each card at its Storage file: images/<slug>.jpg
+-- Point each card at its Storage file: images/images/<slug>.jpg
 update public.models
-set image_url = 'https://xgbxuuzmqrisdnmcqzou.supabase.co/storage/v1/object/public/images/' || slug || '.jpg'
+set image_url = 'https://xgbxuuzmqrisdnmcqzou.supabase.co/storage/v1/object/public/images/images/' || slug || '.jpg'
 where image_url like '/images/%';
