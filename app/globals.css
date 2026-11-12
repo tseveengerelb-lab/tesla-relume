@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens. Colours and motion follow third-party measurements of tesla.com
+ * (white canvas, #171a20/#393c41 text, a single #3e6ae1 accent, colour-only
+ * transitions of 0.33s on cubic-bezier(0.5, 0, 0, 0.75)). Sizes come from Figma.
+ */
+@theme {
+  --color-ink: #171a20;
+  --color-body: #393c41;
+  --color-muted: #8e8e8e;
+  --color-line: #d0d1d2;
+  --color-surface: #f4f4f4;
+  --color-surface-hover: #eee;
+  /* Primary actions: Tailwind indigo. Change these two lines to re-colour every primary button. */
+  --color-accent: var(--color-indigo-600);
+  --color-accent-hover: var(--color-indigo-700);
+
+  /* Breakpoints match the original max-width queries (≤767px, ≤1100px). */
+  --breakpoint-*: initial;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1101px;
+
+  --text-*: initial;
+  --text-sm: 14px;
+  --text-sm--line-height: 1.6;
+  --text-base: 16px;
+  --text-base--line-height: 1.6;
+  --text-md: 18px;
+  --text-md--line-height: 1.6;
+  --text-lg: 22px;
+  --text-lg--line-height: 1.6;
+  --text-h1: 72px;
+  --text-h1--line-height: 1.2;
+  --text-h1--letter-spacing: 0.01em;
+  --text-h1--font-weight: 500;
+  --text-h2: 52px;
+  --text-h2--line-height: 1.2;
+  --text-h2--letter-spacing: 0.01em;
+  --text-h2--font-weight: 500;
+  --text-h5: 28px;
+  --text-h5--line-height: 1.4;
+  --text-h5--letter-spacing: 0.01em;
+  --text-h5--font-weight: 500;
+  --text-h6: 22px;
+  --text-h6--line-height: 1.4;
+  --text-h6--letter-spacing: 0.01em;
+  --text-h6--font-weight: 500;
+
+  --spacing-page: 64px;
+  --spacing-section: 112px;
+
+  /* Not "page": max-w-page would resolve to --spacing-page first. */
+  --container-content: 1280px;
+  --container-title: 768px;
+  --container-form: 560px;
+
+  --ease-tesla: cubic-bezier(0.5, 0, 0, 0.75);
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+}
+
+@layer base {
+  /* Token values shrink at the two breakpoints, so every utility that reads them follows. */
+  @media (max-width: 1100px) {
+    :root {
+      --spacing-page: 32px;
+      --spacing-section: 80px;
+      --text-h1: 56px;
+      --text-h2: 44px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    :root {
+      --spacing-page: 20px;
+      --spacing-section: 64px;
+      --text-h1: 40px;
+      --text-h2: 32px;
+      --text-h5: 24px;
+    }
+  }
+
+  html {
+    color-scheme: light;
+    scroll-padding-top: 88px;
+  }
+
+  @media (max-width: 767px) {
+    html {
+      scroll-padding-top: 112px;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background: #fff;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    overflow-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+}
+
+/* Navbar: transparent at the top, frosted glass once the page scrolls 72px. */
+.navbar-frost {
+  background-color: rgb(255 255 255 / 75%);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+@supports (animation-timeline: scroll()) {
+  .navbar-frost {
+    animation: navbar-frost linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0 72px;
+  }
+}
+
+@keyframes navbar-frost {
+  from {
+    background-color: rgb(255 255 255 / 0%);
+    -webkit-backdrop-filter: blur(0);
+    backdrop-filter: blur(0);
+  }
+
+  to {
+    background-color: rgb(255 255 255 / 75%);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+}
+
+/* Textarea resize grip from Figma: two short lines rotated into the corner. */
+.textarea-grip {
+  position: absolute;
+  right: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.textarea-grip img {
+  flex: none;
+  max-width: none;
+  transform: rotate(135deg);
+  filter: brightness(0);
+}
+
+.textarea-grip--inner {
+  bottom: 1.76px;
+  width: 2px;
+  height: 2px;
+}
+
+.textarea-grip--outer {
+  bottom: 2px;
+  width: 6px;
+  height: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  .navbar-frost {
+    transition: none !important;
+    animation: none !important;
+  }
+}
