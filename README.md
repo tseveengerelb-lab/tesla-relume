@@ -31,6 +31,17 @@ npm run dev      # http://localhost:3000
 
 Supabase тохируулаагүй эсвэл холбогдож чадахгүй үед сайт `data/models.ts`-ийн өгөгдлийг ашиглаж, server log-д анхааруулга бичнэ. Сан дахь өөрчлөлт нүүр хуудсанд 1 минутын дотор гарна (`revalidate = 60`).
 
+### Admin хуудас (`/admin`)
+
+Картын нэр, тайлбар, үнэ, зураг, дарааллыг сайт дээрээс засна. Хадгалмагц нүүр хуудас шууд шинэчлэгдэнэ.
+
+1. **SQL Editor** дээр `supabase/migrations/20261112000200_admin.sql`-ийг ажиллуулна. `admins` хүснэгт, засах болон зураг upload хийх эрх (RLS) үүснэ.
+2. **Authentication → Users → Add user → Create new user**: и-мэйл, нууц үг оруулж **Auto Confirm User**-ийг чагтална.
+3. Тэр файлын төгсгөлд байгаа `insert into public.admins ...` мөрийг өөрийн и-мэйлээр бөглөж ажиллуулна.
+4. **Authentication → Sign In / Providers** хэсэгт **Allow new users to sign up**-ийг унтраавал зөвхөн таны нэмсэн хүн бүртгэлтэй байна.
+
+Нэвтрэлт Supabase Auth-ийн cookie-гээр явагдана (`lib/supabase-auth.ts`, `proxy.ts`). Admin биш хэрэглэгч нэвтэрсэн ч RLS-ийн улмаас юу ч засаж чадахгүй.
+
 ## Хуудаснууд
 
 | Хаяг          | Файл                    |
