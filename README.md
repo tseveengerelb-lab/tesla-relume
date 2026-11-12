@@ -28,6 +28,7 @@ npm run dev      # http://localhost:3000
 | `/model-y`    | `app/[slug]/page.tsx`   |
 | `/cybertruck` | `app/[slug]/page.tsx`   |
 | `/roadster`   | `app/[slug]/page.tsx`   |
+| `/style-guide` | `app/style-guide/page.tsx` — загварын заавар (хайлтын системд индекслэгдэхгүй) |
 
 Загвар бүрийн хуудсыг нэг route үүсгэдэг. Бүх хуудас build хийх үед static HTML болно. Хуучин `model-3.html` гэх мэт хаягууд `next.config.ts` дахь redirect-ээр шинэ хаяг руу шилжинэ.
 
@@ -63,6 +64,8 @@ public/
 - **Нүүр хуудасны загварын хэсгүүд, онцлог, харьцуулах хүснэгт, туршиж жолоодох алхмууд:** `data/content.ts`.
 
 ## Загвар (styling)
+
+Бүх token, товч, форм, компонентыг `/style-guide` хуудаснаас харна. Token-ийн утга өөрчлөгдвөл `data/design-tokens.ts` дахь тайлбарыг мөн шинэчилнэ.
 
 Өнгө, фонтын хэмжээ, зай зэрэг token-ууд `app/globals.css`-ийн `@theme` хэсэгт байна.
 
