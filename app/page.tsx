@@ -46,7 +46,7 @@ export default function HomePage() {
           </ButtonLink>
           <ButtonLink href="#test-drive" variant="link">
             Туршиж жолоодох
-            <Image src="/icons/chevron-right.svg" alt="" width={24} height={24} unoptimized className="brightness-0" />
+            <Image src="/icons/chevron-right.svg" alt="" width={24} height={24} unoptimized className="brightness-0 invert" />
           </ButtonLink>
         </Actions>
       </Section>

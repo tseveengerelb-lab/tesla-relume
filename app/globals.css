@@ -1,17 +1,19 @@
 @import "tailwindcss";
 
 /*
- * Design tokens. Colours and motion follow third-party measurements of tesla.com
- * (white canvas, #171a20/#393c41 text, a single #3e6ae1 accent, colour-only
- * transitions of 0.33s on cubic-bezier(0.5, 0, 0, 0.75)). Sizes come from Figma.
+ * Design tokens. Dark theme: near-black canvas, light text, one indigo accent.
+ * "ink" is the strongest text colour and "body" the secondary one, whatever the
+ * theme. Motion follows tesla.com (colour-only transitions of 0.33s on
+ * cubic-bezier(0.5, 0, 0, 0.75)). Sizes come from Figma.
  */
 @theme {
-  --color-ink: #171a20;
-  --color-body: #393c41;
-  --color-muted: #8e8e8e;
-  --color-line: #d0d1d2;
-  --color-surface: #f4f4f4;
-  --color-surface-hover: #eee;
+  --color-canvas: #0a0a0b;
+  --color-ink: #f4f4f4;
+  --color-body: #b4b6ba;
+  --color-muted: #7a7d83;
+  --color-line: #43464c;
+  --color-surface: #1c1d21;
+  --color-surface-hover: #26282d;
   /* Primary actions: Tailwind indigo. Change these two lines to re-colour every primary button. */
   --color-accent: var(--color-indigo-600);
   --color-accent-hover: var(--color-indigo-700);
@@ -84,7 +86,7 @@
   }
 
   html {
-    color-scheme: light;
+    color-scheme: dark;
     scroll-padding-top: 88px;
   }
 
@@ -101,7 +103,7 @@
   }
 
   body {
-    background: #fff;
+    background: var(--color-canvas);
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: var(--text-base);
@@ -117,9 +119,9 @@
   }
 }
 
-/* Navbar: transparent at the top, frosted glass once the page scrolls 72px. */
+/* Navbar: transparent at the top, dark frosted glass once the page scrolls 72px. */
 .navbar-frost {
-  background-color: rgb(255 255 255 / 75%);
+  background-color: rgb(10 10 11 / 75%);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
@@ -134,13 +136,13 @@
 
 @keyframes navbar-frost {
   from {
-    background-color: rgb(255 255 255 / 0%);
+    background-color: rgb(10 10 11 / 0%);
     -webkit-backdrop-filter: blur(0);
     backdrop-filter: blur(0);
   }
 
   to {
-    background-color: rgb(255 255 255 / 75%);
+    background-color: rgb(10 10 11 / 75%);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
   }
@@ -160,7 +162,7 @@
   flex: none;
   max-width: none;
   transform: rotate(135deg);
-  filter: brightness(0);
+  filter: brightness(0) invert(1);
 }
 
 .textarea-grip--inner {

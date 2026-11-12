@@ -12,9 +12,9 @@ export type ColorToken = {
   swatch: string;
   value: string;
   usage: string;
-  /** Light swatches need an outline to stay visible on white. */
+  /** Swatches close to the canvas need an outline to stay visible. */
   outlined?: boolean;
-  /** WCAG contrast against white (or of white text on it, for the accent). */
+  /** WCAG contrast against the canvas (or of white text on it, for the accent). */
   contrast?: string;
 };
 
@@ -22,18 +22,18 @@ export const colorGroups: { title: string; colors: ColorToken[] }[] = [
   {
     title: "Үндсэн",
     colors: [
-      { name: "Canvas", token: "white", swatch: "bg-white", value: "#FFFFFF", usage: "Хуудасны дэвсгэр", outlined: true },
-      { name: "Ink", token: "ink", swatch: "bg-ink", value: "#171A20", usage: "Гарчиг, үндсэн текст, идэвхтэй хүрээ", contrast: "17.4:1" },
-      { name: "Body", token: "body", swatch: "bg-body", value: "#393C41", usage: "Тайлбар текст, хүснэгтийн мөр", contrast: "11.1:1" },
-      { name: "Muted", token: "muted", swatch: "bg-muted", value: "#8E8E8E", usage: "Зөвхөн placeholder. Үндсэн текстэд хэрэглэхгүй", contrast: "3.3:1" },
+      { name: "Canvas", token: "canvas", swatch: "bg-canvas", value: "#0A0A0B", usage: "Хуудасны дэвсгэр", outlined: true },
+      { name: "Ink", token: "ink", swatch: "bg-ink", value: "#F4F4F4", usage: "Гарчиг, үндсэн текст, идэвхтэй хүрээ", contrast: "18.0:1" },
+      { name: "Body", token: "body", swatch: "bg-body", value: "#B4B6BA", usage: "Тайлбар текст, хүснэгтийн мөр", contrast: "9.7:1" },
+      { name: "Muted", token: "muted", swatch: "bg-muted", value: "#7A7D83", usage: "Placeholder, туслах тэмдэглэгээ. Үндсэн текстэд хэрэглэхгүй", contrast: "4.8:1" },
     ],
   },
   {
     title: "Гадаргуу ба хүрээ",
     colors: [
-      { name: "Surface", token: "surface", swatch: "bg-surface", value: "#F4F4F4", usage: "Карт, хоёрдогч товч, тодруулсан багана", outlined: true },
-      { name: "Surface hover", token: "surface-hover", swatch: "bg-surface-hover", value: "#EEEEEE", usage: "Хоёрдогч товчны hover", outlined: true },
-      { name: "Line", token: "line", swatch: "bg-line", value: "#D0D1D2", usage: "Талбарын доод зураас, хүснэгтийн хүрээ" },
+      { name: "Surface", token: "surface", swatch: "bg-surface", value: "#1C1D21", usage: "Карт, хоёрдогч товч, тодруулсан багана", outlined: true },
+      { name: "Surface hover", token: "surface-hover", swatch: "bg-surface-hover", value: "#26282D", usage: "Хоёрдогч товчны hover", outlined: true },
+      { name: "Line", token: "line", swatch: "bg-line", value: "#43464C", usage: "Талбарын доод зураас, хүснэгтийн хүрээ" },
     ],
   },
   {

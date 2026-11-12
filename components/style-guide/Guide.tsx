@@ -61,16 +61,18 @@ export function Specimen({
 }: {
   caption?: string;
   code?: string;
-  tone?: "white" | "surface" | "dark";
+  tone?: "white" | "surface" | "dark" | "light";
   /** No inner padding, for full-bleed examples. */
   flush?: boolean;
   className?: string;
   children: ReactNode;
 }) {
   const tones = {
-    white: "border border-line bg-white",
+    // "white" is the page canvas (dark theme); "light" is a real white card.
+    white: "border border-line bg-canvas",
     surface: "bg-surface",
-    dark: "bg-ink text-white",
+    dark: "bg-black text-white",
+    light: "bg-white text-black",
   };
   return (
     <figure className="flex min-w-0 flex-col gap-3">
@@ -103,7 +105,7 @@ export function Preview({
 }) {
   return (
     <figure className="flex min-w-0 flex-col gap-3">
-      <div className="overflow-hidden rounded-lg border border-line bg-white">
+      <div className="overflow-hidden rounded-lg border border-line bg-canvas">
         <div className="flex items-center gap-1.5 border-b border-line bg-surface px-4 py-2.5" aria-hidden>
           <span className="size-2.5 rounded-full bg-line" />
           <span className="size-2.5 rounded-full bg-line" />
@@ -126,7 +128,7 @@ export function Rules({ items }: { items: string[] }) {
   return (
     <ul className="grid gap-px overflow-hidden rounded-lg border border-line bg-line md:grid-cols-3">
       {items.map((item) => (
-        <li key={item} className="bg-white p-6 text-base text-body">
+        <li key={item} className="bg-canvas p-6 text-base text-body">
           {item}
         </li>
       ))}

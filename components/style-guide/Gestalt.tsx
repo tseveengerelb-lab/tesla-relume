@@ -43,7 +43,7 @@ export function CommonRegionDiagram() {
     <Canvas>
       <div className="flex items-center gap-4">
         <Dot />
-        <div className="-mx-2 flex gap-4 rounded-lg bg-white p-2 outline outline-line">
+        <div className="-mx-2 flex gap-4 rounded-lg bg-canvas p-2 outline outline-line">
           <Dot />
           <Dot />
           <Dot />

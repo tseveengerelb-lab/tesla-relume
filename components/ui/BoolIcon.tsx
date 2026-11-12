@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-/** Check or cross for yes/no spec values. The SVGs are white, so they are darkened. */
+/** Check or cross for yes/no spec values. The SVGs are white; brightness-0 invert keeps them pure white. */
 export function BoolIcon({ value }: { value: boolean }) {
   return (
     <Image
@@ -9,7 +9,7 @@ export function BoolIcon({ value }: { value: boolean }) {
       width={24}
       height={24}
       unoptimized
-      className="mx-auto brightness-0"
+      className="mx-auto brightness-0 invert"
     />
   );
 }

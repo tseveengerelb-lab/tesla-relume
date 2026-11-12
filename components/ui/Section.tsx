@@ -17,7 +17,7 @@ type SectionProps = ComponentProps<"section"> & {
 /** Page section with side padding and the centred 1280px column. */
 export function Section({ padding = "default", className, children, ...rest }: SectionProps) {
   return (
-    <section className={cx("overflow-clip bg-white px-page", paddings[padding], className)} {...rest}>
+    <section className={cx("overflow-clip bg-canvas px-page", paddings[padding], className)} {...rest}>
       <div className="mx-auto flex w-full max-w-content flex-col items-center gap-20">{children}</div>
     </section>
   );

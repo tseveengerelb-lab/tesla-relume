@@ -94,12 +94,13 @@ export default function StyleGuidePage() {
               {/* 01 Brand */}
               <GuideSection
                 id="brand"
-                description="Цэвэр, цагаан дэвсгэр, том гэрэл зураг, цөөн үг. Машин өөрөө гол дүр байх ёстой тул интерфэйс аль болох ард нь байна."
+                description="Хар дэвсгэр, том гэрэл зураг, цөөн үг. Машин өөрөө гол дүр байх ёстой тул интерфэйс аль болох ард нь байна."
               >
                 <div>
                   <SubHeading>Лого</SubHeading>
                   <div className="grid gap-6 md:grid-cols-2">
                     <Specimen
+                      tone="light"
                       caption="Цагаан дэвсгэр дээр"
                       code="brightness-0"
                       className="flex h-40 items-center justify-center"
@@ -115,7 +116,7 @@ export default function StyleGuidePage() {
                     </Specimen>
                     <Specimen
                       tone="dark"
-                      caption="Бараан дэвсгэр, зураг дээр"
+                      caption="Хар дэвсгэр, зураг дээр · сайтад"
                       code="brightness-0 invert"
                       className="flex h-40 items-center justify-center"
                     >
@@ -474,7 +475,7 @@ export default function StyleGuidePage() {
                         цагираг. Байрлал, хэмжээ хөдлөхгүй.
                       </p>
                       <p>
-                        <span className="font-medium text-ink">Цэс:</span> хуудсыг 72px гүйлгэхэд цагаан, бүдэг шил
+                        <span className="font-medium text-ink">Цэс:</span> хуудсыг 72px гүйлгэхэд хар, бүдэг шил
                         (75%, blur 12px) болно.
                       </p>
                     </div>
@@ -527,7 +528,7 @@ export default function StyleGuidePage() {
                         width={24}
                         height={24}
                         unoptimized
-                        className="brightness-0"
+                        className="brightness-0 invert"
                       />
                     </ButtonLink>
                   </Specimen>
@@ -588,7 +589,7 @@ export default function StyleGuidePage() {
               {/* 09 Icons */}
               <GuideSection
                 id="icons"
-                description="24px, нимгэн шугаман дүрс. SVG файлууд цагаан өнгөтэй тул цагаан дэвсгэр дээр brightness-0 классаар харлуулна."
+                description="24px, нимгэн шугаман дүрс. Хар дэвсгэр дээр brightness-0 invert классаар цэвэр цагаан болгоно."
               >
                 <div className="grid grid-cols-2 gap-6 md:grid-cols-3">
                   {icons.map((icon) => (
@@ -599,7 +600,7 @@ export default function StyleGuidePage() {
                       code={icon.name}
                       className="flex h-32 items-center justify-center"
                     >
-                      <Image src={icon.src} alt="" width={24} height={24} unoptimized className="size-8 brightness-0" />
+                      <Image src={icon.src} alt="" width={24} height={24} unoptimized className="size-8 brightness-0 invert" />
                     </Specimen>
                   ))}
                 </div>

@@ -12,8 +12,8 @@ const base =
 const variants: Record<Variant, string> = {
   primary: "border border-accent bg-accent text-white hover:border-accent-hover hover:bg-accent-hover",
   secondary: "border border-transparent bg-surface text-body hover:bg-surface-hover hover:text-ink",
-  // On a #f4f4f4 card the secondary button switches to a white fill.
-  "secondary-on-surface": "border border-transparent bg-white text-body hover:bg-surface-hover hover:text-ink",
+  // On a surface card the secondary button drops back to the canvas colour.
+  "secondary-on-surface": "border border-transparent bg-canvas text-body hover:bg-surface-hover hover:text-ink",
   link: "gap-2 hover:underline",
 };
 

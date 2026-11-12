@@ -12,7 +12,7 @@ export function Navbar() {
       <div className="flex w-full flex-wrap items-center justify-center gap-x-4 gap-y-3 md:flex-nowrap md:gap-8">
         <div className="flex min-w-px flex-[1_0_0] items-center">
           <Link href="/">
-            {/* The SVG fills with currentColor, which renders black inside <img>. */}
+            {/* The SVG fills with currentColor, which renders black inside <img>; invert makes it white. */}
             <Image
               src="/icons/tesla-logo.svg"
               alt="Tesla"
@@ -20,7 +20,7 @@ export function Navbar() {
               height={16}
               unoptimized
               priority
-              className="h-4 w-[156px] brightness-0"
+              className="h-4 w-[156px] brightness-0 invert"
             />
           </Link>
         </div>
