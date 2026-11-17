@@ -40,13 +40,15 @@ export function TestDriveCta({ steps }: { steps: string[] }) {
   return (
     <Section id="test-drive">
       <div className="flex w-full flex-col gap-6 lg:flex-row lg:items-start lg:gap-20">
-        <h2 className="w-full text-h2 lg:min-w-px lg:flex-[1_0_0]">ТУРШИЖ ЖОЛООДОХ</h2>
+        {/* Similarity: same sentence case as every other heading and button on the site. */}
+        <h2 className="w-full text-h2 lg:min-w-px lg:flex-[1_0_0]">Туршиж жолоодох</h2>
         <div className="flex w-full flex-col gap-10 lg:min-w-px lg:flex-[1_0_0]">
           <TestDriveSteps steps={steps} />
+          {/* Prägnanz: the label says what happens, instead of "ТИЙМ". */}
           <Actions>
-            <ButtonLink href="#order">ТИЙМ</ButtonLink>
+            <ButtonLink href="#order">Цаг товлох</ButtonLink>
             <ButtonLink href="#order" variant="secondary">
-              ОДОО АВАХ
+              Одоо авах
             </ButtonLink>
           </Actions>
         </div>

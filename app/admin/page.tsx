@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { signOut } from "./actions";
 import { ModelEditor, type ModelRow } from "@/components/admin/ModelEditor";
+import { OrdersTable, type OrderRow } from "@/components/admin/OrdersTable";
 import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
@@ -48,11 +49,19 @@ export default async function AdminPage() {
     );
   }
 
-  const { data, error } = await admin.supabase
-    .from("models")
-    .select("slug, name, card_description, card_price, image_url, image_alt, sort_order, updated_at")
-    .order("sort_order")
-    .returns<ModelRow[]>();
+  const [{ data, error }, orders] = await Promise.all([
+    admin.supabase
+      .from("models")
+      .select("slug, name, card_description, card_price, image_url, image_alt, sort_order, updated_at")
+      .order("sort_order")
+      .returns<ModelRow[]>(),
+    admin.supabase
+      .from("orders")
+      .select("id, model, full_name, email, postal_code, phone, amount, amount_paid, status, created_at, paid_at")
+      .order("created_at", { ascending: false })
+      .limit(200)
+      .returns<OrderRow[]>(),
+  ]);
 
   return (
     <Section>
@@ -60,7 +69,7 @@ export default async function AdminPage() {
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-col gap-1">
             <p className="font-semibold leading-normal">Admin</p>
-            <h1 className="text-h2">Машины картууд</h1>
+            <h1 className="text-h2">Удирдлага</h1>
           </div>
           <div className="flex items-center gap-4 text-sm text-body">
             <span>{admin.email}</span>
@@ -76,6 +85,21 @@ export default async function AdminPage() {
         </p>
       </div>
 
+      <div className="flex w-full flex-col gap-6">
+        <div className="flex flex-col gap-1">
+          <h2 className="text-h2">Захиалгууд</h2>
+          <p className="text-body">Byl-ээр урьдчилгаа төлсөн захиалга webhook ирмэгц “Төлөгдсөн” болно.</p>
+        </div>
+        {orders.error ? (
+          <p role="alert" className="w-full text-red-400">
+            Захиалгуудыг уншиж чадсангүй: {orders.error.message}
+          </p>
+        ) : (
+          <OrdersTable orders={orders.data ?? []} />
+        )}
+      </div>
+
+      <h2 className="w-full text-h2">Машины картууд</h2>
       {error ? (
         <p role="alert" className="w-full text-red-400">
           Картуудыг уншиж чадсангүй: {error.message}

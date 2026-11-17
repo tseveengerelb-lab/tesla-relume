@@ -136,7 +136,7 @@ export default function StyleGuidePage() {
                   <Rules
                     items={[
                       "Зураг тэргүүлнэ. Том, бодит гэрэл зураг гол үүрэгтэй; чимэглэл, сүүдэр, градиент хэрэглэхгүй.",
-                      "Нэг онцлох өнгө. Зөвхөн үндсэн үйлдэл indigo өнгөтэй; бусад бүх зүйл хар, саарал, цагаан.",
+                      "Нэг онцлох өнгө. Зөвхөн үндсэн үйлдэл цэнхэр өнгөтэй; бусад бүх зүйл хар, саарал, цагаан.",
                       "Товч, тодорхой. Богино өгүүлбэр, бодит тоо, тодорхой үйл үг: «Захиалах», «Туршиж жолоодох».",
                     ]}
                   />
@@ -369,27 +369,47 @@ export default function StyleGuidePage() {
                     definition="Өнгө, хэлбэр, хэмжээгээрээ ижил зүйлсийг ижил үүрэгтэй гэж хардаг."
                     diagram={<SimilarityDiagram />}
                     usage={[
-                      "Indigo өнгө зөвхөн үндсэн үйлдэлд. Хаана ч харагдсан «энийг дар» гэсэн утгатай.",
-                      "Ижил төрлийн мэдээлэл ижил загвартай: бүх үнэ Semibold, бүх үзүүлэлт Stat компонентоор.",
-                      "Өөр үүрэгтэй зүйлийг ижил харагдуулахгүй: link товч саарал дэвсгэргүй.",
+                      "Цэнхэр өнгө зөвхөн захиалгын үйлдэлд. Цэсний «Нэвтрэх» товч тиймээс саарал.",
+                      "Бүх гарчиг, товч жижиг үсгээр эхэлнэ. ТОМ ҮСЭГ өөр төрлийн зүйл мэт харагдуулна.",
+                      "Ижил төрлийн мэдээлэл ижил загвартай: бүх үзүүлэлт Stat компонентоор, бүх карт 8px булантай.",
                     ]}
                   >
-                    <Specimen caption="Хоёр өөр хуудасны товчны хослол, ижил дүрэм" code="<Actions>">
-                      <div className="flex flex-col items-center gap-6">
-                        <Actions>
-                          <ButtonLink href="#gestalt">Захиалах</ButtonLink>
-                          <ButtonLink href="#gestalt" variant="secondary">
-                            Загвар харьцуулах
-                          </ButtonLink>
-                        </Actions>
-                        <Actions>
-                          <ButtonLink href="#gestalt">Урьдчилан захиалах</ButtonLink>
-                          <ButtonLink href="#gestalt" variant="secondary">
-                            Бусад загвар
-                          </ButtonLink>
-                        </Actions>
+                    <div className="flex flex-col gap-6">
+                      <Specimen caption="Хоёр өөр хуудасны товчны хослол, ижил дүрэм" code="<Actions>">
+                        <div className="flex flex-col items-center gap-6">
+                          <Actions>
+                            <ButtonLink href="#gestalt">Захиалах</ButtonLink>
+                            <ButtonLink href="#gestalt" variant="secondary">
+                              Загвар харьцуулах
+                            </ButtonLink>
+                          </Actions>
+                          <Actions>
+                            <ButtonLink href="#gestalt">Урьдчилан захиалах</ButtonLink>
+                            <ButtonLink href="#gestalt" variant="secondary">
+                              Бусад загвар
+                            </ButtonLink>
+                          </Actions>
+                        </div>
+                      </Specimen>
+                      <div className="grid gap-6 md:grid-cols-2">
+                        <Specimen caption="Хэрэглэхгүй · том үсэг, утгагүй текст" className="flex h-32 items-center justify-center">
+                          <Actions>
+                            <ButtonLink href="#gestalt">ТИЙМ</ButtonLink>
+                            <ButtonLink href="#gestalt" variant="secondary">
+                              ОДОО АВАХ
+                            </ButtonLink>
+                          </Actions>
+                        </Specimen>
+                        <Specimen caption="Хэрэглэнэ · бусадтай ижил бичлэг" className="flex h-32 items-center justify-center">
+                          <Actions>
+                            <ButtonLink href="#gestalt">Цаг товлох</ButtonLink>
+                            <ButtonLink href="#gestalt" variant="secondary">
+                              Одоо авах
+                            </ButtonLink>
+                          </Actions>
+                        </Specimen>
                       </div>
-                    </Specimen>
+                    </div>
                   </GestaltLaw>
 
                   <GestaltLaw
@@ -416,7 +436,7 @@ export default function StyleGuidePage() {
                     diagram={<PragnanzDiagram />}
                     usage={[
                       "Тэгш өнцөгт товч, 8px булан, нэг фонт, нэг онцлох өнгө. Сүүдэр, градиент хэрэглэхгүй.",
-                      "Утгагүй элемент байхгүй: «Товч» гэх мэт placeholder-ийн оронд «Захиалах», «Туршиж жолоодох».",
+                      "Утгагүй элемент байхгүй: «Товч», «ТИЙМ»-ийн оронд «Захиалах», «Цаг товлох» гэх мэт юу болохыг хэлдэг үг.",
                       "Нэг хэсэгт нэг санаа, нэг үндсэн үйлдэл.",
                     ]}
                   >
@@ -431,6 +451,19 @@ export default function StyleGuidePage() {
                       </Specimen>
                     </div>
                   </GestaltLaw>
+                </div>
+                <div>
+                  <SubHeading>Шалгах жагсаалт</SubHeading>
+                  <Rules
+                    items={[
+                      "Ойр: зүйл доторх зай нь зүйл хоорондын зайнаас бага уу?",
+                      "Талбай: нэг сонголтод хамаарах бүх зүйл нэг Surface карт дотор байна уу?",
+                      "Ижил: цэнхэр зөвхөн захиалгын үйлдэлд байна уу? Ижил зүйл ижил харагдаж байна уу?",
+                      "Холбоос: дараалал, нэг бүлэг зүйлсийг шугам эсвэл нэг холбоос нэгтгэж байна уу?",
+                      "Энгийн: сүүдэр, градиент, утгагүй текст, ТОМ ҮСЭГ алга уу?",
+                      "Нэг хэсэгт нэг л цэнхэр товч байна уу?",
+                    ]}
+                  />
                 </div>
               </GuideSection>
 
@@ -486,7 +519,7 @@ export default function StyleGuidePage() {
               {/* 07 Buttons */}
               <GuideSection
                 id="buttons"
-                description="Товч тэгш өнцөгт, Medium жинтэй. Үндсэн үйлдэлд indigo, бусдад саарал. Focus хийхэд дотогшоо 2px цагираг гарна."
+                description="Товч тэгш өнцөгт, Medium жинтэй. Үндсэн үйлдэлд цэнхэр, бусдад саарал. Focus хийхэд дотогшоо 2px цагираг гарна."
               >
                 <div className="grid gap-6 md:grid-cols-2">
                   <Specimen
@@ -532,9 +565,13 @@ export default function StyleGuidePage() {
                       />
                     </ButtonLink>
                   </Specimen>
-                  <Specimen caption="Жижиг · цэсэнд" code='size="sm"' className="flex h-32 items-center justify-center">
-                    <ButtonLink href="#buttons" size="sm">
-                      нэвтрэх
+                  <Specimen
+                    caption="Жижиг · цэсэнд"
+                    code='size="sm" variant="secondary"'
+                    className="flex h-32 items-center justify-center"
+                  >
+                    <ButtonLink href="#buttons" size="sm" variant="secondary">
+                      Нэвтрэх
                     </ButtonLink>
                   </Specimen>
                   <Specimen

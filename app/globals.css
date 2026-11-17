@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /*
- * Design tokens. Dark theme: near-black canvas, light text, one indigo accent.
+ * Design tokens. Dark theme: near-black canvas, light text, one blue accent.
  * "ink" is the strongest text colour and "body" the secondary one, whatever the
  * theme. Motion follows tesla.com (colour-only transitions of 0.33s on
  * cubic-bezier(0.5, 0, 0, 0.75)). Sizes come from Figma.
@@ -14,9 +14,9 @@
   --color-line: #43464c;
   --color-surface: #1c1d21;
   --color-surface-hover: #26282d;
-  /* Primary actions: Tailwind indigo. Change these two lines to re-colour every primary button. */
-  --color-accent: var(--color-indigo-600);
-  --color-accent-hover: var(--color-indigo-700);
+  /* Primary actions: Tesla blue. Change these two lines to re-colour every primary button. */
+  --color-accent: #3e6ae1;
+  --color-accent-hover: #3457b1;
 
   /* Breakpoints match the original max-width queries (≤767px, ≤1100px). */
   --breakpoint-*: initial;

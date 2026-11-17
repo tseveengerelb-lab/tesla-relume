@@ -26,8 +26,9 @@ export function Navbar() {
         </div>
         <NavLinks links={links} />
         <div className="flex min-w-px flex-[1_0_0] items-center justify-end">
-          <ButtonLink href="#" size="sm">
-            нэвтрэх
+          {/* Similarity: blue is kept for ordering, so sign-in uses the grey secondary style. */}
+          <ButtonLink href="/admin" size="sm" variant="secondary">
+            Нэвтрэх
           </ButtonLink>
         </div>
       </div>

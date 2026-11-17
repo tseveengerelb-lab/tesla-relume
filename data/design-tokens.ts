@@ -39,8 +39,8 @@ export const colorGroups: { title: string; colors: ColorToken[] }[] = [
   {
     title: "Онцлох өнгө",
     colors: [
-      { name: "Accent", token: "accent", swatch: "bg-accent", value: "#4F39F6 · indigo-600", usage: "Үндсэн товч, сонгосон checkbox", contrast: "6.5:1" },
-      { name: "Accent hover", token: "accent-hover", swatch: "bg-accent-hover", value: "#432DD7 · indigo-700", usage: "Үндсэн товчны hover", contrast: "8.1:1" },
+      { name: "Accent", token: "accent", swatch: "bg-accent", value: "#3E6AE1 · Tesla blue", usage: "Үндсэн товч, сонгосон checkbox", contrast: "4.8:1" },
+      { name: "Accent hover", token: "accent-hover", swatch: "bg-accent-hover", value: "#3457B1", usage: "Үндсэн товчны hover", contrast: "6.7:1" },
     ],
   },
 ];
