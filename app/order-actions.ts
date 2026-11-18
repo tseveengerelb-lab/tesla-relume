@@ -80,7 +80,8 @@ export async function placeOrder(_prev: OrderState, form: FormData): Promise<Ord
       customer_email: email,
       client_reference_id: orderId,
       phone_number_collection: true,
-      success_url: `${origin}/order/success`,
+      // The success page asks Byl whether this order is paid (works without webhooks).
+      success_url: `${origin}/order/success?order=${orderId}`,
       cancel_url: sameOriginReferer(h.get("referer"), origin),
     });
   } catch (err) {

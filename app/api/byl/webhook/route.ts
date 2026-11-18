@@ -1,4 +1,5 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
+import { markOrderPaid } from "@/lib/orders";
 import { getServiceSupabase } from "@/lib/supabase-admin";
 
 /**
@@ -72,30 +73,27 @@ export async function POST(request: Request) {
     const orderId = checkout.client_reference_id;
     if (!orderId) return Response.json({ ok: true, ignored: "no client_reference_id" });
 
-    const paid = {
-      status: "paid",
-      amount_paid: Number(checkout.amount_total),
-      // Keep a phone saved by an earlier event if this one has none.
-      ...(checkout.phone_number ? { phone: checkout.phone_number } : {}),
-      byl_checkout_id: checkout.id,
-      paid_at: checkout.updated_at,
-    };
-
-    const { data: updated, error } = await db.from("orders").update(paid).eq("id", orderId).select("id");
-    if (error) {
-      console.error("Byl webhook: order update failed", orderId, error.message);
+    let found: boolean;
+    try {
+      found = await markOrderPaid(db, orderId, checkout);
+    } catch (error) {
+      console.error("Byl webhook: order update failed", orderId, error);
       return new Response("Database error", { status: 500 }); // Byl will retry
     }
 
     // The form's insert failed earlier: record the payment from Byl's data so it is not lost.
-    if (!updated?.length) {
+    if (!found) {
       const { error: insertError } = await db.from("orders").upsert({
         id: orderId,
         email: checkout.customer_email ?? "",
         full_name: null,
         model: checkout.items?.[0]?.product?.name ?? null,
         amount: Number(checkout.amount_total),
-        ...paid,
+        status: "paid",
+        amount_paid: Number(checkout.amount_total),
+        phone: checkout.phone_number ?? null,
+        byl_checkout_id: checkout.id,
+        paid_at: checkout.updated_at,
       });
       if (insertError) {
         console.error("Byl webhook: order insert failed", orderId, insertError.message);

@@ -32,6 +32,17 @@ export type CreateCheckoutInput = {
 /** Create returns only id and url. */
 export type BylCheckoutLink = { id: number; url: string };
 
+export type BylCheckout = BylCheckoutLink & {
+  status: "open" | "pending" | "complete" | "expired";
+  mode: "payment" | "subscription";
+  /** Decimal string, e.g. "100.000000000000". */
+  amount_total: string;
+  client_reference_id: string | null;
+  customer_email: string | null;
+  expires_at: string;
+  updated_at: string;
+};
+
 function config() {
   const token = process.env.BYL_TOKEN?.trim();
   const projectId = process.env.BYL_PROJECT_ID?.trim();
@@ -76,3 +87,5 @@ async function bylFetch<T>(path: string, init: { method: "GET" | "POST"; body?: 
 
 export const createCheckout = (input: CreateCheckoutInput) =>
   bylFetch<BylCheckoutLink>("/checkouts", { method: "POST", body: input });
+
+export const getCheckout = (id: number) => bylFetch<BylCheckout>(`/checkouts/${id}`, { method: "GET" });
