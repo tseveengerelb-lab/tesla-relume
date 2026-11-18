@@ -5,7 +5,8 @@ import { redirect } from "next/navigation";
 import { BylError, bylConfigured, createCheckout, depositAmount } from "@/lib/byl";
 import { getServiceSupabase } from "@/lib/supabase-admin";
 
-export type OrderState = { error?: string } | undefined;
+/** On error, the submitted values come back so the form can refill itself (React resets it after an action). */
+export type OrderState = { error?: string; values?: Record<string, string> } | undefined;
 
 const text = (form: FormData, key: string, max = 120) => String(form.get(key) ?? "").trim().slice(0, max);
 
@@ -36,12 +37,21 @@ function sameOriginReferer(referer: string | null, origin: string) {
 export async function placeOrder(_prev: OrderState, form: FormData): Promise<OrderState> {
   const name = text(form, "full-name");
   const email = text(form, "email");
-  const postalCode = text(form, "zip", 20);
+  const postalCode = text(form, "zip", 20).replace(/\D/g, "");
+  // Accept "9911 2233", "99112233" or "+976 9911 2233"; store the 8 digits.
+  const phone = text(form, "phone", 20).replace(/\D/g, "").replace(/^976(?=\d{8}$)/, "");
   const model = text(form, "model", 40) || "Tesla";
+  const fail = (error: string): OrderState => ({
+    error,
+    values: { "full-name": name, email, phone: text(form, "phone", 20), zip: text(form, "zip", 20) },
+  });
 
-  if (!name || !/^\S+@\S+\.\S+$/.test(email)) return { error: "Нэр болон и-мэйлээ зөв оруулна уу." };
-  if (form.get("terms") !== "on") return { error: "Үйлчилгээний нөхцөлийг зөвшөөрнө үү." };
-  if (!bylConfigured()) return { error: "Төлбөрийн систем тохируулаагүй байна. Түр хүлээгээд дахин оролдоно уу." };
+  if (!name) return fail("Овог нэрээ оруулна уу.");
+  if (!/^\S+@\S+\.\S+$/.test(email)) return fail("И-мэйл хаягаа зөв оруулна уу.");
+  if (!/^\d{8}$/.test(phone)) return fail("Утасны дугаараа 8 оронтойгоор оруулна уу.");
+  if (postalCode && !/^\d{5}$/.test(postalCode)) return fail("Шуудангийн код 5 оронтой байна.");
+  if (form.get("terms") !== "on") return fail("Үйлчилгээний нөхцөлийг зөвшөөрнө үү.");
+  if (!bylConfigured()) return fail("Төлбөрийн систем тохируулаагүй байна. Түр хүлээгээд дахин оролдоно уу.");
 
   const h = await headers();
   const origin = siteOrigin(h);
@@ -56,6 +66,7 @@ export async function placeOrder(_prev: OrderState, form: FormData): Promise<Ord
       model,
       full_name: name,
       email,
+      phone,
       postal_code: postalCode || null,
       amount: depositAmount,
     });
@@ -79,14 +90,15 @@ export async function placeOrder(_prev: OrderState, form: FormData): Promise<Ord
       ],
       customer_email: email,
       client_reference_id: orderId,
-      phone_number_collection: true,
+      // The phone is already on our form; asking again on Byl's page would be a second, identical question.
+      phone_number_collection: false,
       // The success page asks Byl whether this order is paid (works without webhooks).
       success_url: `${origin}/order/success?order=${orderId}`,
       cancel_url: sameOriginReferer(h.get("referer"), origin),
     });
   } catch (err) {
     console.error("Byl checkout failed", err instanceof BylError ? `${err.status} ${err.message}` : err);
-    return { error: "Төлбөрийн хуудас нээж чадсангүй. Түр хүлээгээд дахин оролдоно уу." };
+    return fail("Төлбөрийн хуудас нээж чадсангүй. Түр хүлээгээд дахин оролдоно уу.");
   }
 
   if (db) {

@@ -22,7 +22,7 @@ export default function HomePage() {
       <VehicleGrid />
 
       {showcases.map((showcase) => (
-        <ModelShowcase key={showcase.id} showcase={showcase} />
+        <ModelShowcase key={showcase.modelSlug} showcase={showcase} />
       ))}
 
       <Section padding="features" aria-labelledby="features-title">

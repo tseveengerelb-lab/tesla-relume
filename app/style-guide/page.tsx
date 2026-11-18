@@ -38,7 +38,7 @@ import { Section } from "@/components/ui/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { BoolIcon } from "@/components/ui/BoolIcon";
 import { Actions, Button, ButtonLink } from "@/components/ui/Button";
-import { Checkbox, TextAreaField, TextField, TextLink } from "@/components/ui/Field";
+import { Checkbox, TextField, TextLink } from "@/components/ui/Field";
 import { Stat } from "@/components/ui/Stat";
 import { cx } from "@/lib/cx";
 
@@ -197,7 +197,7 @@ export default function StyleGuidePage() {
               >
                 <Specimen caption="Inter · Latin, Кирилл · next/font-оор ачаалагдана" code="font-sans">
                   <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-                    <p className="text-[96px] font-medium leading-none tracking-[0.01em] md:text-[128px]">Аа</p>
+                    <p className="text-[96px] font-medium leading-none tracking-[-0.02em] md:text-[128px]">Аа</p>
                     <div className="grid grid-cols-2 gap-x-8 gap-y-2 text-md">
                       <span className="font-normal">Regular 400</span>
                       <span className="font-medium">Medium 500</span>
@@ -369,9 +369,9 @@ export default function StyleGuidePage() {
                     definition="Өнгө, хэлбэр, хэмжээгээрээ ижил зүйлсийг ижил үүрэгтэй гэж хардаг."
                     diagram={<SimilarityDiagram />}
                     usage={[
-                      "Цэнхэр өнгө зөвхөн захиалгын үйлдэлд. Цэсний «Нэвтрэх» товч тиймээс саарал.",
+                      "Цэнхэр өнгө зөвхөн захиалгын үйлдэлд: цэсний цорын ганц цэнхэр товч бол «Захиалах».",
                       "Бүх гарчиг, товч жижиг үсгээр эхэлнэ. ТОМ ҮСЭГ өөр төрлийн зүйл мэт харагдуулна.",
-                      "Ижил төрлийн мэдээлэл ижил загвартай: бүх үзүүлэлт Stat компонентоор, бүх карт 8px булантай.",
+                      "Ижил төрлийн мэдээлэл ижил загвартай: бүх үзүүлэлт Stat компонентоор; карт, зураг, товч бүгд 8px булантай.",
                     ]}
                   >
                     <div className="flex flex-col gap-6">
@@ -402,9 +402,9 @@ export default function StyleGuidePage() {
                         </Specimen>
                         <Specimen caption="Хэрэглэнэ · бусадтай ижил бичлэг" className="flex h-32 items-center justify-center">
                           <Actions>
-                            <ButtonLink href="#gestalt">Цаг товлох</ButtonLink>
+                            <ButtonLink href="#gestalt">Хүсэлт илгээх</ButtonLink>
                             <ButtonLink href="#gestalt" variant="secondary">
-                              Одоо авах
+                              Бусад загвар
                             </ButtonLink>
                           </Actions>
                         </Specimen>
@@ -476,9 +476,9 @@ export default function StyleGuidePage() {
                   <SubHeading>Булан</SubHeading>
                   <div className="grid gap-6 md:grid-cols-3">
                     {[
-                      { className: "rounded-none", label: "0", usage: "Товч, формын талбар" },
+                      { className: "rounded-none", label: "0", usage: "Формын талбар (зөвхөн доод зураас)" },
                       { className: "rounded", label: "4px", usage: "Цэсний сонгогдсон хэсэг" },
-                      { className: "rounded-lg", label: "8px", usage: "Зураг, карт, панел" },
+                      { className: "rounded-lg", label: "8px", usage: "Товч, зураг, карт, панел" },
                     ].map((radius) => (
                       <div key={radius.className} className="flex flex-col gap-3">
                         <div className={cx("h-28 border-2 border-ink bg-surface", radius.className)} />
@@ -567,11 +567,11 @@ export default function StyleGuidePage() {
                   </Specimen>
                   <Specimen
                     caption="Жижиг · цэсэнд"
-                    code='size="sm" variant="secondary"'
+                    code='size="sm"'
                     className="flex h-32 items-center justify-center"
                   >
-                    <ButtonLink href="#buttons" size="sm" variant="secondary">
-                      Нэвтрэх
+                    <ButtonLink href="#buttons" size="sm">
+                      Захиалах
                     </ButtonLink>
                   </Specimen>
                   <Specimen
@@ -601,7 +601,7 @@ export default function StyleGuidePage() {
                 id="forms"
                 description="Талбар нь зөвхөн доод зураастай, хүрээгүй. Focus хийхэд зураас Ink өнгөтэй болно. Шошго үргэлж талбарын дээр харагдана."
               >
-                <Specimen caption="components/ui/Field.tsx" code="<TextField> <TextAreaField> <Checkbox>">
+                <Specimen caption="components/ui/Field.tsx" code="<TextField> <Checkbox>">
                   <div className="mx-auto flex max-w-form flex-col items-center gap-6">
                     <TextField id="sg-name" label="Овог нэр" type="text" autoComplete="off" />
                     <TextField
@@ -611,7 +611,7 @@ export default function StyleGuidePage() {
                       defaultValue="bat@example.mn"
                       autoComplete="off"
                     />
-                    <TextAreaField id="sg-zip" label="Шуудангийн код" placeholder="ж.нь 94301" />
+                    <TextField id="sg-zip" label="Шуудангийн код" inputMode="numeric" placeholder="14200" maxLength={5} autoComplete="off" />
                     <div className="flex w-full flex-col gap-3">
                       <Checkbox id="sg-check-off">Сонгоогүй</Checkbox>
                       <Checkbox id="sg-check-on" defaultChecked>

@@ -33,3 +33,21 @@ export function NavLinks({ links }: { links: NavLink[] }) {
     </nav>
   );
 }
+
+/**
+ * Order button for the navbar. Pages with an order form scroll to it; other pages
+ * (success, admin, style guide) go to the home page's form.
+ */
+export function NavOrderLink({ formPaths }: { formPaths: string[] }) {
+  const pathname = usePathname();
+  const href = formPaths.includes(pathname) ? "#order" : "/#order";
+
+  return (
+    <Link
+      href={href}
+      className="inline-flex min-h-9 items-center justify-center whitespace-nowrap rounded-lg bg-accent px-3.5 text-sm font-medium text-white transition-colors duration-330 ease-tesla hover:bg-accent-hover"
+    >
+      Захиалах
+    </Link>
+  );
+}

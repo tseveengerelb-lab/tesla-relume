@@ -1,5 +1,4 @@
-import type { CompareHeader, Feature, SpecRow, StatItem } from "./types";
-import { requireModel } from "./models";
+import type { CompareHeader, Feature, SpecRow } from "./types";
 
 export const siteName = "Улаанбаатарт Tesla-гаа сонгоорой";
 
@@ -49,69 +48,29 @@ export const features: Feature[] = [
   },
 ];
 
+/**
+ * Home page model sections. Name, tagline, text and stats come from data/models.ts,
+ * so a section can never show one model's photo with another model's words.
+ */
 export type Showcase = {
-  id: string;
-  tagline: string;
-  title: string;
-  description: string;
   modelSlug: string;
+  /** Photo on the right (desktop). Alternating sides keeps the long page rhythmic. */
   reverse?: boolean;
-  stats: StatItem[];
 };
 
-const model3Stats = requireModel("model-3").stats;
-
-/** Home page model sections, as written in Figma. */
 export const showcases: Showcase[] = [
-  {
-    id: "model-3",
-    tagline: "Спорт седан",
-    title: "Model 3",
-    description: "RWD $36,990 · Premium RWD $42,490 · Premium AWD $47,490 · Performance $54,990",
-    modelSlug: "model-3",
-    stats: model3Stats,
-  },
-  {
-    id: "model-y",
-    tagline: "Дунд оврын SUV",
-    title: "Model Y",
-    description:
-      "Илүү их зай, илүү их ачаа, ижил програм хангамж. RWD $39,990 · AWD $41,990 · Premium RWD $45,990 · Premium AWD $49,990 · Performance $57,990",
-    modelSlug: "model-y",
-    reverse: true,
-    stats: requireModel("model-y").stats,
-  },
-  {
-    id: "cybertruck",
-    tagline: "Пикап",
-    title: "Cybertruck",
-    description:
-      "Зэвэрдэггүй ган их бие, хүчирхэг чирэх чадвар, Cyberbeast-д суперкарын хурд. AWD $69,990 · Premium AWD $79,990 · Cyberbeast $99,990",
-    modelSlug: "cybertruck",
-    stats: [
-      { value: "2.6–4.1 с", label: "0–97 км/цаг, хувилбараар" },
-      { value: "483–523 км", label: "Явах зай, EPA" },
-      { value: "845 м.х.", label: "Cyberbeast-ийн хүч" },
-    ],
-  },
-  // As written in Figma: the image is the Roadster, the text is Model 3.
-  {
-    id: "roadster",
-    tagline: "Спорт седан",
-    title: "Model 3",
-    description:
-      "Бүх хувилбар нь хурдан, Performance нь уралдааны замд бэлэн. Standard RWD $36,990 · Premium RWD $42,490 · Premium AWD $47,490 · Performance AWD $54,990",
-    modelSlug: "roadster",
-    reverse: true,
-    stats: model3Stats,
-  },
+  { modelSlug: "model-3" },
+  { modelSlug: "model-y", reverse: true },
+  { modelSlug: "cybertruck" },
+  { modelSlug: "roadster", reverse: true },
 ];
 
-/** Home page compare table, as in Figma: two model headers over three value columns. */
+/** Home page compare table: one header per value column. */
 export const homeCompare: { headers: CompareHeader[]; rows: SpecRow[] } = {
   headers: [
     { name: "Model 3", price: "$36,990-с эхэлнэ" },
     { name: "Model Y", price: "$39,990-с эхэлнэ" },
+    { name: "Cybertruck", price: "$69,990-с эхэлнэ" },
   ],
   rows: [
     { label: "0–97 км/цаг", values: ["2.9 с", "3.3 с", "2.6 с"] },

@@ -44,12 +44,13 @@ export function TestDriveCta({ steps }: { steps: string[] }) {
         <h2 className="w-full text-h2 lg:min-w-px lg:flex-[1_0_0]">Туршиж жолоодох</h2>
         <div className="flex w-full flex-col gap-10 lg:min-w-px lg:flex-[1_0_0]">
           <TestDriveSteps steps={steps} />
-          {/* Prägnanz: the label says what happens, instead of "ТИЙМ". */}
+          {/*
+            Prägnanz: one button, labelled with what it really does. The order form is
+            where a specialist picks up the request and arranges the drive; two buttons
+            with different words that open the same form only made people choose.
+          */}
           <Actions>
-            <ButtonLink href="#order">Цаг товлох</ButtonLink>
-            <ButtonLink href="#order" variant="secondary">
-              Одоо авах
-            </ButtonLink>
+            <ButtonLink href="#order">Хүсэлт илгээх</ButtonLink>
           </Actions>
         </div>
       </div>

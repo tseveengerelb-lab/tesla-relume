@@ -11,7 +11,7 @@ export function Stat({ value, label, fluid = false }: StatProps) {
     <div className="flex flex-[1_0_0] flex-col gap-2 font-medium">
       <p
         className={cx(
-          "text-[48px] leading-[1.2] tracking-[0.01em]",
+          "text-[48px] leading-[1.1] tracking-[-0.02em] tabular-nums",
           fluid ? "md:text-[clamp(var(--text-h2),5vw,var(--text-h1))]" : "md:text-[length:var(--text-h1)]",
         )}
       >

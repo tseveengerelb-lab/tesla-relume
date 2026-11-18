@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { models } from "@/data/models";
-import { ButtonLink } from "@/components/ui/Button";
-import { NavLinks } from "./NavLinks";
+import { NavLinks, NavOrderLink } from "./NavLinks";
 
 const links = models.map((model) => ({ href: `/${model.slug}`, label: model.name }));
+/** Pages that end in an order form (#order). */
+const formPaths = ["/", ...links.map((link) => link.href)];
 
 export function Navbar() {
   return (
@@ -26,10 +27,12 @@ export function Navbar() {
         </div>
         <NavLinks links={links} />
         <div className="flex min-w-px flex-[1_0_0] items-center justify-end">
-          {/* Similarity: blue is kept for ordering, so sign-in uses the grey secondary style. */}
-          <ButtonLink href="/admin" size="sm" variant="secondary">
-            Нэвтрэх
-          </ButtonLink>
+          {/*
+            Similarity: blue means "order" everywhere on the site, so the one blue
+            control in the navbar is the order button. Staff sign in at /admin
+            directly; a sign-in button only confused customers.
+          */}
+          <NavOrderLink formPaths={formPaths} />
         </div>
       </div>
     </header>

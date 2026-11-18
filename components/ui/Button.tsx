@@ -24,9 +24,15 @@ type ButtonStyle = {
   children: ReactNode;
 };
 
+/*
+ * 44px tall (36px small): a comfortable touch target. 8px corners, the same as
+ * cards and photos, so every rounded thing on the page reads as one family
+ * (Gestalt: similarity).
+ */
 function buttonClass({ variant = "primary", size = "md", className }: Omit<ButtonStyle, "children">) {
-  const padding = variant === "link" ? "" : size === "sm" ? "px-2.5 py-1" : "px-3 py-1.5";
-  return cx(base, variants[variant], padding, className);
+  const box =
+    variant === "link" ? "min-h-11" : size === "sm" ? "min-h-9 rounded-lg px-3.5 text-sm" : "min-h-11 rounded-lg px-5";
+  return cx(base, variants[variant], box, className);
 }
 
 export function ButtonLink({

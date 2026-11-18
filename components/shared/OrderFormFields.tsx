@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 import { placeOrder } from "@/app/order-actions";
 import { Button } from "@/components/ui/Button";
-import { Checkbox, TextAreaField, TextField, TextLink } from "@/components/ui/Field";
+import { Checkbox, TextField, TextLink } from "@/components/ui/Field";
 
 type OrderFormFieldsProps = {
   submitLabel: string;
@@ -12,31 +12,67 @@ type OrderFormFieldsProps = {
   deposit: string;
 };
 
+/**
+ * Proximity: the contact fields form one group; the agreement, the price note and
+ * the button form a second, tighter group at the end — everything about "paying"
+ * sits together, right where the decision is made.
+ */
 export function OrderFormFields({ submitLabel, model, deposit }: OrderFormFieldsProps) {
   const [state, action, pending] = useActionState(placeOrder, undefined);
+  const values = state?.values;
 
   return (
-    <form action={action} className="flex w-full max-w-form flex-col items-center gap-6">
+    <form action={action} className="flex w-full max-w-form flex-col gap-10">
       {model && <input type="hidden" name="model" value={model} />}
-      <TextField id="full-name" label="Овог нэр" type="text" autoComplete="name" required />
-      <TextField id="email" label="И-мэйл" type="email" autoComplete="email" required />
-      <TextAreaField id="zip" label="Шуудангийн код" placeholder="ж.нь 94301" autoComplete="postal-code" required />
-      <div className="w-full pb-4">
+
+      <div className="flex flex-col gap-6">
+        <TextField id="full-name" label="Овог нэр" type="text" autoComplete="name" defaultValue={values?.["full-name"]} required />
+        <TextField id="email" label="И-мэйл" type="email" autoComplete="email" defaultValue={values?.email} required />
+        <div className="grid gap-6 md:grid-cols-2">
+          <TextField
+            id="phone"
+            label="Утасны дугаар"
+            type="tel"
+            inputMode="numeric"
+            autoComplete="tel-national"
+            placeholder="9911 2233"
+            pattern="[+0-9 ]{8,16}"
+            title="8 оронтой утасны дугаар"
+            defaultValue={values?.phone}
+            required
+          />
+          <TextField
+            id="zip"
+            label="Шуудангийн код"
+            type="text"
+            inputMode="numeric"
+            autoComplete="postal-code"
+            placeholder="14200"
+            pattern="[0-9]{5}"
+            maxLength={5}
+            title="5 оронтой шуудангийн код"
+            defaultValue={values?.zip}
+          />
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-4">
         <Checkbox id="terms" required>
           <TextLink href="#">Үйлчилгээний нөхцөл</TextLink>-ийг зөвшөөрч байна
         </Checkbox>
-      </div>
-      <p className="w-full text-sm text-muted">
-        Захиалга баталгаажуулах урьдчилгаа {deposit}. Byl-ээр (QPay, SocialPay, карт) төлнө.
-      </p>
-      {state?.error && (
-        <p role="alert" className="w-full text-sm text-red-400">
-          {state.error}
+        <p className="text-sm text-body">
+          Захиалга баталгаажуулах урьдчилгаа <span className="font-semibold text-ink tabular-nums">{deposit}</span>.
+          Дараагийн алхамд Byl-ээр (QPay, SocialPay, карт) төлнө.
         </p>
-      )}
-      <Button type="submit" disabled={pending} className="disabled:opacity-60">
-        {pending ? "Төлбөр рүү шилжиж байна…" : submitLabel}
-      </Button>
+        {state?.error && (
+          <p role="alert" className="text-sm text-red-400">
+            {state.error}
+          </p>
+        )}
+        <Button type="submit" disabled={pending} className="mt-2 w-full disabled:opacity-60 md:w-auto md:self-start">
+          {pending ? "Төлбөр рүү шилжиж байна…" : submitLabel}
+        </Button>
+      </div>
     </form>
   );
 }

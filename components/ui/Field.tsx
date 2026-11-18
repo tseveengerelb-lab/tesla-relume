@@ -12,7 +12,7 @@ export function TextField({ id, label, ...input }: ComponentProps<"input"> & Lab
       <input
         id={id}
         name={id}
-        className={`h-12 w-full border-b border-line bg-transparent py-2 outline-none focus:border-ink focus-visible:outline-none ${fade}`}
+        className={`h-12 w-full border-b border-line bg-transparent py-2 outline-none placeholder:text-muted focus:border-ink focus-visible:outline-none ${fade}`}
         {...input}
       />
     </div>
