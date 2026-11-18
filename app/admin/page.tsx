@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { signOut } from "./actions";
 import { ModelEditor, type ModelRow } from "@/components/admin/ModelEditor";
 import { OrdersTable, type OrderRow } from "@/components/admin/OrdersTable";
+import { TestDrivesTable, type TestDriveRow } from "@/components/admin/TestDrivesTable";
 import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
@@ -49,7 +50,7 @@ export default async function AdminPage() {
     );
   }
 
-  const [{ data, error }, orders] = await Promise.all([
+  const [{ data, error }, orders, testDrives] = await Promise.all([
     admin.supabase
       .from("models")
       .select("slug, name, card_description, card_price, image_url, image_alt, sort_order, updated_at")
@@ -61,6 +62,12 @@ export default async function AdminPage() {
       .order("created_at", { ascending: false })
       .limit(200)
       .returns<OrderRow[]>(),
+    admin.supabase
+      .from("test_drives")
+      .select("id, model, full_name, phone, preferred_date, preferred_time, status, created_at")
+      .order("preferred_date", { ascending: false })
+      .limit(200)
+      .returns<TestDriveRow[]>(),
   ]);
 
   return (
@@ -96,6 +103,20 @@ export default async function AdminPage() {
           </p>
         ) : (
           <OrdersTable orders={orders.data ?? []} />
+        )}
+      </div>
+
+      <div className="flex w-full flex-col gap-6">
+        <div className="flex flex-col gap-1">
+          <h2 className="text-h2">Туршилтын жолоодлого</h2>
+          <p className="text-body">Төлбөргүй хүсэлтүүд. Утсаар холбогдож цагийг баталгаажуулна.</p>
+        </div>
+        {testDrives.error ? (
+          <p role="alert" className="w-full text-red-400">
+            Хүсэлтүүдийг уншиж чадсангүй: {testDrives.error.message}
+          </p>
+        ) : (
+          <TestDrivesTable requests={testDrives.data ?? []} />
         )}
       </div>
 

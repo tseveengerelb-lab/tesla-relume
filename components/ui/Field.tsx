@@ -19,6 +19,38 @@ export function TextField({ id, label, ...input }: ComponentProps<"input"> & Lab
   );
 }
 
+/** Underlined dropdown, matching TextField (similarity: every field looks like one kind of thing). */
+export function SelectField({
+  id,
+  label,
+  children,
+  ...select
+}: ComponentProps<"select"> & Labelled & { children: ReactNode }) {
+  return (
+    <div className="flex w-full flex-col gap-2">
+      <label htmlFor={id}>{label}</label>
+      <div className="relative">
+        <select
+          id={id}
+          name={id}
+          className={`h-12 w-full cursor-pointer appearance-none border-b border-line bg-transparent py-2 pr-8 outline-none focus:border-ink focus-visible:outline-none [&>option]:bg-surface ${fade}`}
+          {...select}
+        >
+          {children}
+        </select>
+        {/* Plain <img>: a decorative chevron. */}
+        <img
+          src="/icons/chevron-right.svg"
+          alt=""
+          width={20}
+          height={20}
+          className="pointer-events-none absolute top-1/2 right-1 -translate-y-1/2 rotate-90 brightness-0 invert"
+        />
+      </div>
+    </div>
+  );
+}
+
 /** Tall field with the Figma resize grip; the textarea itself does not resize. */
 export function TextAreaField({ id, label, ...textarea }: ComponentProps<"textarea"> & Labelled) {
   return (

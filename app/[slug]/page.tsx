@@ -55,7 +55,7 @@ export default async function ModelPage({ params }: Props) {
         </Section>
       )}
 
-      {!model.preorder && <TestDriveCta steps={testDriveSteps} />}
+      {!model.preorder && <TestDriveCta steps={testDriveSteps} model={model.name} />}
 
       {model.preorder ? (
         <OrderForm

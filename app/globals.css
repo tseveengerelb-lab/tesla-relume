@@ -161,6 +161,13 @@
   }
 }
 
+/* Date field: the browser's calendar icon is dark by default; make it match the light text. */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(1);
+  opacity: 0.8;
+}
+
 /* Textarea resize grip from Figma: two short lines rotated into the corner. */
 .textarea-grip {
   position: absolute;
