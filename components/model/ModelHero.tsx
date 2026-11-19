@@ -3,6 +3,7 @@ import { Actions, ButtonLink } from "@/components/ui/Button";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { Section } from "@/components/ui/Section";
 import { MediaSplit } from "@/components/shared/MediaSplit";
+import { CalBookingButton } from "@/components/shared/CalBooking";
 
 export function ModelHero({ model }: { model: Model }) {
   return (
@@ -27,9 +28,9 @@ export function ModelHero({ model }: { model: Model }) {
                 <Magnetic>
                   <ButtonLink href="#order">Захиалах</ButtonLink>
                 </Magnetic>
-                <ButtonLink href="#test-drive" variant="secondary">
+                <CalBookingButton model={model.name} variant="secondary">
                   Туршиж жолоодох
-                </ButtonLink>
+                </CalBookingButton>
               </>
             )}
           </Actions>

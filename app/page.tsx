@@ -7,6 +7,7 @@ import { CompareTable } from "@/components/shared/CompareTable";
 import { FeatureList } from "@/components/shared/Features";
 import { OrderForm } from "@/components/shared/OrderForm";
 import { TestDriveCta } from "@/components/shared/TestDriveCta";
+import { CalBookingButton } from "@/components/shared/CalBooking";
 import { Actions, ButtonLink } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
@@ -44,10 +45,10 @@ export default function HomePage() {
           <ButtonLink href="#order" variant="secondary">
             Захиалах
           </ButtonLink>
-          <ButtonLink href="#test-drive" variant="link">
+          <CalBookingButton variant="link">
             Туршиж жолоодох
             <Image src="/icons/chevron-right.svg" alt="" width={24} height={24} unoptimized className="brightness-0 invert" />
-          </ButtonLink>
+          </CalBookingButton>
         </Actions>
       </Section>
     </>

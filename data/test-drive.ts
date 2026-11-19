@@ -1,5 +1,8 @@
 /** Shared by the test drive form and its server action, so both accept the same choices. */
 
+/** Cal.com event the "Туршиж жолоодох" buttons open as a popup (cal.com/<this>). */
+export const calLink = "tseveengerel-batsuuri-5jeido/tesla-tst-drive";
+
 export const testDriveModels = ["Model 3", "Model Y", "Cybertruck"] as const;
 
 export const testDriveSlots = ["10:00–12:00", "12:00–14:00", "14:00–16:00", "16:00–18:00"] as const;
