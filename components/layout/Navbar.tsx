@@ -9,7 +9,10 @@ const formPaths = ["/", ...links.map((link) => link.href)];
 
 export function Navbar() {
   return (
-    <header className="navbar-frost sticky top-0 z-10 flex min-h-[72px] items-center px-page py-3 md:py-0">
+    // Frosted glass (bg-canvas/75 + backdrop-blur-md) is the resting look. animate-navbar-frost
+    // runs from transparent to it over the first 72px of scroll; browsers without
+    // scroll timelines skip straight to the frosted look.
+    <header className="sticky top-0 z-10 flex min-h-[72px] animate-navbar-frost items-center bg-canvas/75 px-page py-3 backdrop-blur-md [animation-range:0_72px] [animation-timeline:scroll(root_block)] md:py-0">
       <div className="flex w-full flex-wrap items-center justify-center gap-x-4 gap-y-3 md:flex-nowrap md:gap-8">
         <div className="flex min-w-px flex-[1_0_0] items-center">
           <Link href="/">

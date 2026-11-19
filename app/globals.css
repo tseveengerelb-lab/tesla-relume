@@ -59,6 +59,19 @@
   --container-form: 560px;
 
   --ease-tesla: cubic-bezier(0.5, 0, 0, 0.75);
+
+  /*
+   * animate-navbar-frost: the navbar goes from transparent to frosted glass.
+   * Driven by page scroll, not time: the Navbar adds the scroll timeline next to it.
+   */
+  --animate-navbar-frost: navbar-frost linear both;
+
+  @keyframes navbar-frost {
+    from {
+      background-color: transparent;
+      backdrop-filter: blur(0);
+    }
+  }
 }
 
 @theme inline {
@@ -132,35 +145,6 @@
   }
 }
 
-/* Navbar: transparent at the top, dark frosted glass once the page scrolls 72px. */
-.navbar-frost {
-  background-color: rgb(10 10 11 / 75%);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-}
-
-@supports (animation-timeline: scroll()) {
-  .navbar-frost {
-    animation: navbar-frost linear both;
-    animation-timeline: scroll(root block);
-    animation-range: 0 72px;
-  }
-}
-
-@keyframes navbar-frost {
-  from {
-    background-color: rgb(10 10 11 / 0%);
-    -webkit-backdrop-filter: blur(0);
-    backdrop-filter: blur(0);
-  }
-
-  to {
-    background-color: rgb(10 10 11 / 75%);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-  }
-}
-
 /* Date field: the browser's calendar icon is dark by default; make it match the light text. */
 input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
@@ -198,8 +182,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  .navbar-frost {
+  * {
     transition: none !important;
     animation: none !important;
   }
