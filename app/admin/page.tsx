@@ -4,7 +4,8 @@ import { redirect } from "next/navigation";
 import { signOut } from "./actions";
 import { ModelEditor, type ModelRow } from "@/components/admin/ModelEditor";
 import { OrdersTable, type OrderRow } from "@/components/admin/OrdersTable";
-import { TestDrivesTable, type TestDriveRow } from "@/components/admin/TestDrivesTable";
+import { CalBookingsTable } from "@/components/admin/CalBookingsTable";
+import { getTestDriveBookings } from "@/lib/cal";
 import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
@@ -62,12 +63,7 @@ export default async function AdminPage() {
       .order("created_at", { ascending: false })
       .limit(200)
       .returns<OrderRow[]>(),
-    admin.supabase
-      .from("test_drives")
-      .select("id, model, full_name, phone, preferred_date, preferred_time, status, created_at")
-      .order("preferred_date", { ascending: false })
-      .limit(200)
-      .returns<TestDriveRow[]>(),
+    getTestDriveBookings(),
   ]);
 
   return (
@@ -109,14 +105,27 @@ export default async function AdminPage() {
       <div className="flex w-full flex-col gap-6">
         <div className="flex flex-col gap-1">
           <h2 className="text-h2">Туршилтын жолоодлого</h2>
-          <p className="text-body">Төлбөргүй хүсэлтүүд. Утсаар холбогдож цагийг баталгаажуулна.</p>
+          <p className="text-body">
+            Cal.com-оор товлосон цагууд. Цуцлах, цаг өөрчлөхийг{" "}
+            <a
+              href="https://app.cal.com/bookings/upcoming"
+              target="_blank"
+              rel="noopener"
+              className="underline underline-offset-4 hover:text-ink"
+            >
+              Cal.com дээр
+            </a>{" "}
+            хийнэ.
+          </p>
         </div>
-        {testDrives.error ? (
+        {!testDrives ? (
+          <p className="w-full text-body">Cal.com холбогдоогүй байна. .env.local файлд CAL_API_KEY нэмнэ үү.</p>
+        ) : !testDrives.ok ? (
           <p role="alert" className="w-full text-red-400">
-            Хүсэлтүүдийг уншиж чадсангүй: {testDrives.error.message}
+            Cal.com-оос уншиж чадсангүй: {testDrives.error}
           </p>
         ) : (
-          <TestDrivesTable requests={testDrives.data ?? []} />
+          <CalBookingsTable bookings={testDrives.bookings} />
         )}
       </div>
 
