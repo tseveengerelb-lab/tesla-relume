@@ -3,8 +3,9 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useActionState, useEffect, useState } from "react";
 import { requestTestDrive } from "@/app/test-drive-actions";
-import { Button } from "@/components/ui/Button";
-import { SelectField, TextField } from "@/components/ui/Field";
+import { TextField } from "@/components/ui/Field";
+import { LoadingButton } from "@/components/ui/LoadingButton";
+import { Segmented } from "@/components/ui/Segmented";
 import { testDriveMaxDays, testDriveModels, testDriveSlots, ubDate } from "@/data/test-drive";
 
 /**
@@ -63,23 +64,20 @@ export function TestDriveForm({ model }: { model?: string }) {
         </motion.div>
       ) : (
         <motion.div key="form" exit={{ opacity: 0, scale: 0.98, filter: "blur(4px)" }} transition={{ duration: 0.25 }}>
-          {/* Keyed on the returned values: React resets a form after an action but does not
-        re-apply a changed defaultValue to <select>, so the form remounts with them instead. */}
+          {/* Keyed on the returned values: React resets a form after an action, so the
+              form remounts with them and every field, tabs included, starts from them. */}
           <form
             key={values ? JSON.stringify(values) : "empty"}
             action={action}
             className="flex flex-col gap-6 rounded-lg bg-surface p-6 md:p-8"
           >
-            <SelectField id="td-model" label="Загвар" defaultValue={values?.["td-model"] ?? model ?? ""} required>
-              <option value="" disabled>
-                Сонгох
-              </option>
-              {testDriveModels.map((name) => (
-                <option key={name} value={name}>
-                  {name}
-                </option>
-              ))}
-            </SelectField>
+            <Segmented
+              name="td-model"
+              label="Загвар"
+              options={testDriveModels}
+              defaultValue={values?.["td-model"] ?? model}
+              required
+            />
             <TextField
               id="td-name"
               label="Овог нэр"
@@ -100,7 +98,8 @@ export function TestDriveForm({ model }: { model?: string }) {
               defaultValue={values?.["td-phone"]}
               required
             />
-            <div className="grid gap-6 md:grid-cols-2">
+            {/* Proximity: date and time sit together, both answer "when?". */}
+            <div className="flex flex-col gap-6">
               <TextField
                 id="td-date"
                 label="Өдөр"
@@ -110,16 +109,14 @@ export function TestDriveForm({ model }: { model?: string }) {
                 defaultValue={values?.["td-date"]}
                 required
               />
-              <SelectField id="td-time" label="Цаг" defaultValue={values?.["td-time"] ?? ""} required>
-                <option value="" disabled>
-                  Сонгох
-                </option>
-                {testDriveSlots.map((slot) => (
-                  <option key={slot} value={slot}>
-                    {slot}
-                  </option>
-                ))}
-              </SelectField>
+              <Segmented
+                name="td-time"
+                label="Цаг"
+                options={testDriveSlots}
+                defaultValue={values?.["td-time"]}
+                columns="grid-cols-2 md:grid-cols-4"
+                required
+              />
             </div>
 
             {/* Honeypot for bots; hidden from people and screen readers. */}
@@ -140,9 +137,9 @@ export function TestDriveForm({ model }: { model?: string }) {
                   </motion.p>
                 )}
               </AnimatePresence>
-              <Button type="submit" disabled={pending} className="w-full disabled:opacity-60 md:w-auto md:self-start">
-                {pending ? "Илгээж байна…" : "Цаг товлох"}
-              </Button>
+              <LoadingButton pending={pending} pendingLabel="Илгээж байна…" className="w-full md:w-auto md:self-start">
+                Цаг товлох
+              </LoadingButton>
               <p className="text-sm text-body">Туршилтын жолоодлого үнэ төлбөргүй.</p>
             </div>
           </form>

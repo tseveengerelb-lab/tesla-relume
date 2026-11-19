@@ -514,6 +514,13 @@ export default function StyleGuidePage() {
                         (CountUp). Муруй <Code>[0.16, 1, 0.3, 1]</Code>, 0.8 секунд.
                       </p>
                       <p>
+                        <span className="font-medium text-ink">Харилцан үйлдэл:</span> цэсний тодруулга болон
+                        формын табууд (Segmented) идэвхтэй сонголт руу гулсана (layoutId). Карт курсорыг дагаж 8°
+                        хүртэл хазайна (Tilt). Илгээх товч spinner руу жигд шилжинэ (LoadingButton). Жижиг гарчиг
+                        үсэг үсгээр тайлагдана (ScrambleText). Гүйлгэлтийн явц дээд зураас болон буланд цагирагаар
+                        харагдана.
+                      </p>
+                      <p>
                         <span className="font-medium text-ink">Захиалах товч:</span> курсор 48px дотор ирэхэд соронз
                         шиг татагдана (Magnetic).
                       </p>

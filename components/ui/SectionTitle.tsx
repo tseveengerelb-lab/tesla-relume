@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Stagger, StaggerItem } from "@/components/motion/Reveal";
 import { TextReveal } from "@/components/motion/TextReveal";
+import { ScrambleText } from "@/components/motion/ScrambleText";
 import { cx } from "@/lib/cx";
 
 type SectionTitleProps = {
@@ -27,14 +28,18 @@ export function SectionTitle({
 }: SectionTitleProps) {
   const isH1 = Heading === "h1";
   const heading: ReactNode = (
-    <Heading className={isH1 ? "text-h1" : "text-h2"}>{isH1 ? <TextReveal text={title} delay={0.15} /> : title}</Heading>
+    <Heading className={isH1 ? "text-h1" : "text-h2"}>
+      {isH1 ? <TextReveal text={title} delay={0.15} /> : title}
+    </Heading>
   );
 
   return (
     <Stagger className={cx("flex w-full max-w-title flex-col gap-4 text-center", className)}>
       {tagline && (
         <StaggerItem>
-          <p className="font-semibold leading-normal">{tagline}</p>
+          <p className="font-semibold leading-normal">
+            <ScrambleText text={tagline} />
+          </p>
         </StaggerItem>
       )}
       {description ? (

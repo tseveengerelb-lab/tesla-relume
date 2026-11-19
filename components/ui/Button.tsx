@@ -29,7 +29,7 @@ type ButtonStyle = {
  * cards and photos, so every rounded thing on the page reads as one family
  * (Gestalt: similarity).
  */
-function buttonClass({ variant = "primary", size = "md", className }: Omit<ButtonStyle, "children">) {
+export function buttonClass({ variant = "primary", size = "md", className }: Omit<ButtonStyle, "children">) {
   const box =
     variant === "link" ? "min-h-11" : size === "sm" ? "min-h-9 rounded-lg px-3.5 text-sm" : "min-h-11 rounded-lg px-5";
   return cx(base, variants[variant], box, className);

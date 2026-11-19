@@ -2,6 +2,7 @@ import Image from "next/image";
 import { features } from "@/data/content";
 import type { Feature } from "@/data/types";
 import { Stagger, StaggerItem } from "@/components/motion/Reveal";
+import { Tilt } from "@/components/motion/Tilt";
 
 export function FeatureCard({ feature }: { feature: Feature }) {
   return (
@@ -28,7 +29,9 @@ export function FeatureList() {
     <Stagger className="flex w-full flex-col items-stretch gap-8 lg:flex-row">
       {features.map((feature) => (
         <StaggerItem key={feature.title} className="w-full lg:min-w-px lg:flex-[1_0_0]">
-          <FeatureCard feature={feature} />
+          <Tilt className="h-full">
+            <FeatureCard feature={feature} />
+          </Tilt>
         </StaggerItem>
       ))}
     </Stagger>

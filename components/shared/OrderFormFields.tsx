@@ -2,7 +2,7 @@
 
 import { useActionState } from "react";
 import { placeOrder } from "@/app/order-actions";
-import { Button } from "@/components/ui/Button";
+import { LoadingButton } from "@/components/ui/LoadingButton";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { Checkbox, TextField, TextLink } from "@/components/ui/Field";
 
@@ -27,7 +27,14 @@ export function OrderFormFields({ submitLabel, model, deposit }: OrderFormFields
       {model && <input type="hidden" name="model" value={model} />}
 
       <div className="flex flex-col gap-6">
-        <TextField id="full-name" label="Овог нэр" type="text" autoComplete="name" defaultValue={values?.["full-name"]} required />
+        <TextField
+          id="full-name"
+          label="Овог нэр"
+          type="text"
+          autoComplete="name"
+          defaultValue={values?.["full-name"]}
+          required
+        />
         <TextField id="email" label="И-мэйл" type="email" autoComplete="email" defaultValue={values?.email} required />
         <div className="grid gap-6 md:grid-cols-2">
           <TextField
@@ -71,9 +78,9 @@ export function OrderFormFields({ submitLabel, model, deposit }: OrderFormFields
           </p>
         )}
         <Magnetic className="mt-2 w-full md:w-auto md:self-start">
-          <Button type="submit" disabled={pending} className="w-full disabled:opacity-60">
-            {pending ? "Төлбөр рүү шилжиж байна…" : submitLabel}
-          </Button>
+          <LoadingButton pending={pending} pendingLabel="Төлбөр рүү шилжиж байна…" className="w-full">
+            {submitLabel}
+          </LoadingButton>
         </Magnetic>
       </div>
     </form>
