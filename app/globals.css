@@ -145,9 +145,41 @@
   }
 }
 
+/*
+ * Mouse pointer: a small Roadster seen from above, nose up-left like an arrow.
+ * The nose (8, 5) is the click point. White by default; blue over anything
+ * clickable, so "this does something" still shows. Text fields keep the I-beam.
+ * PNGs at 1x and 2x keep it sharp on Retina screens; the SVG is the fallback.
+ * Unlayered on purpose: it must win over Tailwind's cursor-pointer utility.
+ * Touch screens have no pointer and never see it.
+ */
+html,
+input[type="date"] {
+  cursor: url("/cursors/roadster.svg") 8 5, auto;
+  cursor: -webkit-image-set(url("/cursors/roadster.png") 1x, url("/cursors/roadster@2x.png") 2x) 8 5, auto;
+  cursor: image-set(url("/cursors/roadster.png") 1x, url("/cursors/roadster@2x.png") 2x) 8 5, auto;
+}
+
+a[href],
+button:not(:disabled),
+select,
+summary,
+label[for],
+input[type="checkbox"],
+input[type="date"]::-webkit-calendar-picker-indicator,
+.cursor-pointer {
+  cursor: url("/cursors/roadster-pointer.svg") 8 5, pointer;
+  cursor: -webkit-image-set(url("/cursors/roadster-pointer.png") 1x, url("/cursors/roadster-pointer@2x.png") 2x) 8 5, pointer;
+  cursor: image-set(url("/cursors/roadster-pointer.png") 1x, url("/cursors/roadster-pointer@2x.png") 2x) 8 5, pointer;
+}
+
+input:not([type="checkbox"]):not([type="date"]),
+textarea {
+  cursor: text;
+}
+
 /* Date field: the browser's calendar icon is dark by default; make it match the light text. */
 input[type="date"]::-webkit-calendar-picker-indicator {
-  cursor: pointer;
   filter: invert(1);
   opacity: 0.8;
 }
