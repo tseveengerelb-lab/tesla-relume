@@ -1,6 +1,7 @@
 import { Section } from "@/components/ui/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { depositAmount } from "@/lib/byl";
+import { Reveal } from "@/components/motion/Reveal";
 import { OrderFormFields } from "./OrderFormFields";
 
 type OrderFormProps = {
@@ -22,11 +23,13 @@ export function OrderForm({
   return (
     <Section id="order">
       <SectionTitle tagline={tagline} title={title} description={description} />
-      <OrderFormFields
-        submitLabel={submitLabel}
-        model={model}
-        deposit={`${depositAmount.toLocaleString("en-US")}₮`}
-      />
+      <Reveal className="flex w-full justify-center">
+        <OrderFormFields
+          submitLabel={submitLabel}
+          model={model}
+          deposit={`${depositAmount.toLocaleString("en-US")}₮`}
+        />
+      </Reveal>
     </Section>
   );
 }

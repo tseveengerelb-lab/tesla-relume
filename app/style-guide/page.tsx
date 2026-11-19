@@ -470,7 +470,7 @@ export default function StyleGuidePage() {
               {/* 06 Shape & motion */}
               <GuideSection
                 id="shape"
-                description="Хэлбэр энгийн, булан зөөлөн. Хөдөлгөөн зөвхөн өнгөнд: шилжилт 0.33 секунд, нэг ижил муруйгаар. Хэрэглэгч хөдөлгөөн багасгахыг сонгосон бол бүх шилжилт унтарна."
+                description="Хэлбэр энгийн, булан зөөлөн. Hover нь зөвхөн өнгө солино (0.33 секунд). Контент гүйлгэхэд нэг удаа зөөлөн орж ирнэ (Motion сан). Хэрэглэгч хөдөлгөөн багасгахыг сонгосон бол бүх хөдөлгөөн унтарч, зөвхөн бүдгэрэлт үлдэнэ."
               >
                 <div>
                   <SubHeading>Булан</SubHeading>
@@ -504,8 +504,18 @@ export default function StyleGuidePage() {
                         <span className="font-medium text-ink">Муруй:</span> <Code>cubic-bezier(0.5, 0, 0, 0.75)</Code>
                       </p>
                       <p>
-                        <span className="font-medium text-ink">Юу хөдөлнө:</span> өнгө, дэвсгэр, хүрээ, focus-ийн
-                        цагираг. Байрлал, хэмжээ хөдлөхгүй.
+                        <span className="font-medium text-ink">Hover:</span> өнгө, дэвсгэр, хүрээ, focus-ийн цагираг.
+                        Картын зураг 5% томорно.
+                      </p>
+                      <p>
+                        <span className="font-medium text-ink">Орж ирэх (Motion):</span> <Code>components/motion/</Code>.
+                        Гарчиг, карт 24px доороос бүдгэрлээс тодорч дараалан гарна (Reveal, Stagger). Нүүрний гарчиг
+                        үг үгээр (TextReveal), том зураг доороос нээгдэнэ (ImageReveal), тоо 0-ээс тоологдоно
+                        (CountUp). Муруй <Code>[0.16, 1, 0.3, 1]</Code>, 0.8 секунд.
+                      </p>
+                      <p>
+                        <span className="font-medium text-ink">Захиалах товч:</span> курсор 48px дотор ирэхэд соронз
+                        шиг татагдана (Magnetic).
                       </p>
                       <p>
                         <span className="font-medium text-ink">Цэс:</span> хуудсыг 72px гүйлгэхэд хар, бүдэг шил

@@ -1,6 +1,7 @@
 import type { CompareHeader, SpecRow, SpecValue } from "@/data/types";
 import { BoolIcon } from "@/components/ui/BoolIcon";
 import { cx } from "@/lib/cx";
+import { Reveal } from "@/components/motion/Reveal";
 
 type CompareTableProps = {
   headers: CompareHeader[];
@@ -31,7 +32,7 @@ export function CompareTable({ headers, rows }: CompareTableProps) {
   const highlight = (index: number) => index === 0 && "bg-surface";
 
   return (
-    <div className="w-full overflow-x-auto">
+    <Reveal className="w-full overflow-x-auto">
       <table className={cx("w-full table-fixed border-collapse", !simple && "max-lg:min-w-[720px]")}>
         <colgroup>
           <col className={cx("w-[404px] max-lg:w-[240px]", simple && "max-md:w-[55%]")} />
@@ -79,6 +80,6 @@ export function CompareTable({ headers, rows }: CompareTableProps) {
           ))}
         </tbody>
       </table>
-    </div>
+    </Reveal>
   );
 }

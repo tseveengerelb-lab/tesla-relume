@@ -1,5 +1,6 @@
 import type { StatItem } from "@/data/types";
 import { cx } from "@/lib/cx";
+import { CountUp } from "@/components/motion/CountUp";
 
 type StatProps = StatItem & {
   /** In a row of three the value scales with the viewport (72px at 1440). */
@@ -15,7 +16,7 @@ export function Stat({ value, label, fluid = false }: StatProps) {
           fluid ? "md:text-[clamp(var(--text-h2),5vw,var(--text-h1))]" : "md:text-[length:var(--text-h1)]",
         )}
       >
-        {value}
+        <CountUp value={value} />
       </p>
       <p className="text-h6 text-body">{label}</p>
     </div>

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import type { ReactNode } from "react";
 import { Navbar } from "@/components/layout/Navbar";
+import { MotionProvider } from "@/components/motion/MotionProvider";
+import { ScrollProgress } from "@/components/motion/ScrollProgress";
 import { siteDescription, siteName } from "@/data/content";
 import "./globals.css";
 
@@ -20,8 +22,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="mn" className={inter.variable} data-scroll-behavior="smooth">
       <body>
-        <Navbar />
-        <main id="top">{children}</main>
+        <MotionProvider>
+          <ScrollProgress />
+          <Navbar />
+          <main id="top">{children}</main>
+        </MotionProvider>
       </body>
     </html>
   );

@@ -2,6 +2,7 @@ import { getProductCards } from "@/data/product-cards";
 import { ButtonLink } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { Stagger, StaggerItem } from "@/components/motion/Reveal";
 import { ProductCard } from "./ProductCard";
 
 /** Vehicle cards, read from the Supabase `models` table. */
@@ -13,11 +14,13 @@ export async function VehicleGrid() {
       <SectionTitle title="Автомашинууд" />
       {/* Proximity: the compare button belongs to the cards, so it sits closer (48px) than the title does (80px). */}
       <div className="flex w-full flex-col items-center gap-12">
-        <div className="grid w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <Stagger className="grid w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {cards.map((card) => (
-            <ProductCard key={card.slug} card={card} />
+            <StaggerItem key={card.slug}>
+              <ProductCard card={card} />
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
         <ButtonLink href="#compare" variant="secondary">
           Бүх загварыг харьцуулах
         </ButtonLink>

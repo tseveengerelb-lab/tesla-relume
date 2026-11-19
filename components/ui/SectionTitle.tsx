@@ -1,3 +1,6 @@
+import type { ReactNode } from "react";
+import { Stagger, StaggerItem } from "@/components/motion/Reveal";
+import { TextReveal } from "@/components/motion/TextReveal";
 import { cx } from "@/lib/cx";
 
 type SectionTitleProps = {
@@ -10,6 +13,10 @@ type SectionTitleProps = {
   className?: string;
 };
 
+/**
+ * Tagline, heading and description arrive one after another as the block scrolls
+ * in. The page's h1 also gets the word-by-word blur-in.
+ */
 export function SectionTitle({
   title,
   tagline,
@@ -18,19 +25,30 @@ export function SectionTitle({
   inverse = false,
   className,
 }: SectionTitleProps) {
-  const heading = <Heading className={Heading === "h1" ? "text-h1" : "text-h2"}>{title}</Heading>;
+  const isH1 = Heading === "h1";
+  const heading: ReactNode = (
+    <Heading className={isH1 ? "text-h1" : "text-h2"}>{isH1 ? <TextReveal text={title} delay={0.15} /> : title}</Heading>
+  );
 
   return (
-    <div className={cx("flex w-full max-w-title flex-col gap-4 text-center", className)}>
-      {tagline && <p className="font-semibold leading-normal">{tagline}</p>}
+    <Stagger className={cx("flex w-full max-w-title flex-col gap-4 text-center", className)}>
+      {tagline && (
+        <StaggerItem>
+          <p className="font-semibold leading-normal">{tagline}</p>
+        </StaggerItem>
+      )}
       {description ? (
         <div className="flex flex-col gap-6">
-          {heading}
-          <p className={cx("text-md", inverse ? "text-white" : "text-body")}>{description}</p>
+          {isH1 ? heading : <StaggerItem>{heading}</StaggerItem>}
+          <StaggerItem>
+            <p className={cx("text-md", inverse ? "text-white" : "text-body")}>{description}</p>
+          </StaggerItem>
         </div>
-      ) : (
+      ) : isH1 ? (
         heading
+      ) : (
+        <StaggerItem>{heading}</StaggerItem>
       )}
-    </div>
+    </Stagger>
   );
 }

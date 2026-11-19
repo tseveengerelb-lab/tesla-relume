@@ -10,7 +10,7 @@ import type { ProductCardData } from "@/data/types";
  */
 export function ProductCard({ card }: { card: ProductCardData }) {
   return (
-    <article>
+    <article className="h-full">
       <Link
         href={`/${card.slug}`}
         className="group flex h-full flex-col gap-4 rounded-lg focus-visible:outline-offset-4"
@@ -21,7 +21,7 @@ export function ProductCard({ card }: { card: ProductCardData }) {
             alt={card.image.alt}
             fill
             sizes="(min-width: 1101px) 25vw, (min-width: 768px) 50vw, 100vw"
-            className="object-cover"
+            className="object-cover transition-transform duration-700 ease-tesla group-hover:scale-105"
           />
         </div>
         <div className="flex flex-1 flex-col gap-1">
