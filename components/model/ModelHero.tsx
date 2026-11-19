@@ -1,5 +1,6 @@
 import type { Model } from "@/data/types";
 import { Actions, ButtonLink } from "@/components/ui/Button";
+import { Magnetic } from "@/components/ui/Magnetic";
 import { Section } from "@/components/ui/Section";
 import { MediaSplit } from "@/components/shared/MediaSplit";
 
@@ -14,14 +15,18 @@ export function ModelHero({ model }: { model: Model }) {
           <Actions className="mt-4">
             {model.preorder ? (
               <>
-                <ButtonLink href="#order">Урьдчилан захиалах</ButtonLink>
+                <Magnetic>
+                  <ButtonLink href="#order">Урьдчилан захиалах</ButtonLink>
+                </Magnetic>
                 <ButtonLink href="/#vehicles" variant="secondary">
                   Бусад загвар
                 </ButtonLink>
               </>
             ) : (
               <>
-                <ButtonLink href="#order">Захиалах</ButtonLink>
+                <Magnetic>
+                  <ButtonLink href="#order">Захиалах</ButtonLink>
+                </Magnetic>
                 <ButtonLink href="#test-drive" variant="secondary">
                   Туршиж жолоодох
                 </ButtonLink>

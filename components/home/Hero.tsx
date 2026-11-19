@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Actions, ButtonLink } from "@/components/ui/Button";
+import { Magnetic } from "@/components/ui/Magnetic";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 
 /**
@@ -20,7 +21,9 @@ export function Hero() {
           inverse
         />
         <Actions className="justify-center">
-          <ButtonLink href="#order">Захиалах</ButtonLink>
+          <Magnetic>
+            <ButtonLink href="#order">Захиалах</ButtonLink>
+          </Magnetic>
           <ButtonLink href="#compare" variant="secondary">
             Загвар харьцуулах
           </ButtonLink>

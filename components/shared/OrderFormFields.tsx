@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import { placeOrder } from "@/app/order-actions";
 import { Button } from "@/components/ui/Button";
+import { Magnetic } from "@/components/ui/Magnetic";
 import { Checkbox, TextField, TextLink } from "@/components/ui/Field";
 
 type OrderFormFieldsProps = {
@@ -69,9 +70,11 @@ export function OrderFormFields({ submitLabel, model, deposit }: OrderFormFields
             {state.error}
           </p>
         )}
-        <Button type="submit" disabled={pending} className="mt-2 w-full disabled:opacity-60 md:w-auto md:self-start">
-          {pending ? "Төлбөр рүү шилжиж байна…" : submitLabel}
-        </Button>
+        <Magnetic className="mt-2 w-full md:w-auto md:self-start">
+          <Button type="submit" disabled={pending} className="w-full disabled:opacity-60">
+            {pending ? "Төлбөр рүү шилжиж байна…" : submitLabel}
+          </Button>
+        </Magnetic>
       </div>
     </form>
   );
